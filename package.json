@@ -1,0 +1,38 @@
+{
+  "name": "@afuzzybear/mkrcomponent",
+  "version": "1.0.0",
+  "description": "A small CLI utility application that allows you to quickly make either a React Class Component or a Functional Component. Enter the name of the Component and the type you wish to make. The application would create the relevent folder structure found in React for handling src components. It would also creates the accompanying component stylesheet and test file within its component directory.",
+  "main": "index.js",
+  "type": "module",
+  "scripts": {
+    "mkrcomp":"node ./index.js",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/aFuzzyBear/mkrcomponent.git"
+  },
+  "keywords": [
+    "make",
+    "react",
+    "component"
+  ],
+  "author": "aFuzzyBear",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/aFuzzyBear/mkrcomponent/issues"
+  },
+  "homepage": "https://github.com/aFuzzyBear/mkrcomponent#readme",
+  "dependencies": {
+    "chalk": "^4.1.0",
+    "commander": "^7.1.0"
+  },
+  "devDependencies": {
+    "eslint": "^7.20.0",
+    "eslint-config-standard": "^16.0.2",
+    "eslint-plugin-import": "^2.22.1",
+    "eslint-plugin-node": "^11.1.0",
+    "eslint-plugin-promise": "^4.3.1",
+    "eslint-plugin-react": "^7.22.0"
+  }
+}
