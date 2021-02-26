@@ -1,4 +1,4 @@
-#!/usr/bon/env node
+#!/usr/bin/env node
 'use strict'
 /*
 *
@@ -18,7 +18,7 @@
 * It outputs a template of a Standard React Component Class or Function. It comes with Template scripts for each Component type: along with options for accompanying files like associated stylesheet and test file, allowing the 
 * developer freedom of time from having to repeat the same setup for each file. 
 * 
-* ComponentDirectory = src/components/${componentName}/
+* Path for ComponentDirectory = src/components/${componentName}/
 * componentName = userInput - string
 * isJSXClass = userInput - boolean
 * isJSXFunction = userInput - boolean
@@ -52,8 +52,10 @@
 import * as fsPromises from 'fs/promises';
 import util from 'util';
 import chalk from 'chalk';
+import { existsSync } from 'fs';
 
-
+const PATH = './demo/components'
+let compName = ""
 
 // Setting up Abort Controller
 
@@ -68,12 +70,23 @@ const isWord =/([A-Z]|[a-z])\w+/gi
 
 // Global Functions
 
+
 /**
- * Capitalise First Letter of a String
- * @param {string} str 
- * @returns - string - First Letter is only Capitalised
+ * toPascalCase
+ * @param {String} input 
+ * @returns A string that has been converted into Pascal Case for keeping with the Naming convention required for naming Components. 
  */
-const capitalise = (str) => str.charAt(0).toUpperCase() + str.slice(1)
+const toPascalCase=(input)=>{
+    return `${input}`
+      .replace(new RegExp(/[-_]+/, 'g'), ' ')
+      .replace(new RegExp(/[^\w\s]/, 'g'), '')
+      .replace(
+        new RegExp(/\s+(.)(\w+)/, 'g'),
+        ($1, $2, $3) => `${$2.toUpperCase() + $3.toLowerCase()}`
+      )
+      .replace(new RegExp(/\s/, 'g'), '')
+      .replace(new RegExp(/\w/), s => s.toUpperCase());
+}
 
 /**
  * Template Engine
@@ -122,7 +135,7 @@ setTimeout(()=>ac.abort(),10000)
 async function readTemplate(fileName,compName){
     try{
         let contents = await fsPromises.readFile(`./templates/${fileName}.template.js`,{encoding:'utf8'})
-        let filled = await fillTemplate(contents,{compName:capitalise(compName)})
+        let filled = await fillTemplate(contents,{compName:compName,})
         return filled
     }catch(err){
         console.error('Error Reading the File: '+err);
@@ -131,7 +144,7 @@ async function readTemplate(fileName,compName){
 // Write the Output file
 async function writeFile(compName,buffer,extension){
     try {
-        let write = fsPromises.writeFile(`./src/components/${compName}/${compName}.${extension}`,buffer,{
+        let write = fsPromises.writeFile(`./${PATH}/${compName}/${compName}.${extension}`,buffer,{
             options:'utf-8'
         })
         return write
@@ -142,11 +155,11 @@ async function writeFile(compName,buffer,extension){
 // Make Directory
 async function mkdirectory(compName){
     try {
+            const mkdir = await fsPromises.mkdir(`${PATH}/${compName}`,(err)=>{
+                if(err) throw err
+            })
+            return mkdir
         
-        const mkdir = await fsPromises.mkdir(`./src/components/${compName}`,(err)=>{
-            if(err) throw err
-        })
-        return mkdir
     
     } catch (error) {
         console.error(`Error Making the Component Directory: ${error}` )
@@ -154,36 +167,10 @@ async function mkdirectory(compName){
 }
 
 
-// File buffers
-let fileBufferdemo,jsxClassBuffer,jsxFuncBuffer,tsxFuncBuffer,tsxClassBuffer,cssBuffer,testBuffer
+// File buffer
 
-async function initJSXClassBuffer(compName){
-    return jsxClassBuffer = await readTemplate('jsxClass',compName)
-    
-}
-async function initJSXFuncBuffer(compName){
-    return jsxFuncBuffer = await  readTemplate('jsxFunction',compName)
-
-}
-async function initCSSFuncBuffer(compName){
-    return cssBuffer = await  readTemplate('cssStylesheet',compName)
-
-}
-async function initTestBuffer(compName){
-    return testBuffer = await readTemplate('reactTestFile',compName)
-}
-
-async function initTSXClassBuffer(compName){
-    return tsxClassBuffer = await readTemplate('tsxClass',compName)
-}
-
-async function initTSXFuncBuffer(compName){
-    return tsxFuncBuffer = await  readTemplate('tsxFunction',compName)
-}
-
-// 
-async function mkComp(compName){
-
+async function initBuffer(fileName,compName){
+    return await readTemplate(fileName,compName)
 }
 
 
@@ -193,15 +180,17 @@ async function mkComp(compName){
 
 // debug_racer(capitalise('mehe'))
 // debug_racer(initCSSFuncBuffer('mehe'))
-// debug_memUsage()
+debug_memUsage()
 
-debug_racer(writeFile('Ben',await initJSXClassBuffer('ben'),'js'))
+// debug_racer(writeFile('racer',await initJSXClassBuffer('racer'),'js'))
 
 
-// Demo Script
-// fileBufferdemo = await readFile('jsxClass','demo')
-// console.log(fileBufferdemo,jsxClassBuffer,jsxFuncBuffer,tsxFuncBuffer,tsxClassBuffer,cssBuffer,testBuffer)
-// if(fileBufferdemo){
-//     await mkdirectory('demo')
-//     await writeFile('demo',fileBufferdemo,'jsx')
-// }
+
+let str = ""
+let input = toPascalCase(str)
+
+
+if(!existsSync(`${PATH}/${input}`)) await mkdirectory(input)
+
+await writeFile(input,await initBuffer('sass',input),'scss')
+await writeFile(input,await initBuffer('css',input),'css')
