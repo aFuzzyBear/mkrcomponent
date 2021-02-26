@@ -1,11 +1,10 @@
 // File Imports Go Here
-import React, {Component} from 'react'
+import React, {} from 'react'
 // Component Companion Stylesheet
 import '/${compName}.css'
 
-
 /**
- * ${compName} Component
+ * ${compName} Component - Lazy
  * 
  * @exports @function ${compName}
  * List of Props
@@ -18,10 +17,20 @@ import '/${compName}.css'
  * For more information on React Lazy Loaded functions
  * @see https://reactjs.org/docs/code-splitting.html#reactlazy
  */
+
+// Lazy load from external component
+// const OtherComponent = React.lazy(() => import('./OtherComponent'));
 export const ${compName} = ({props}) => {
     //Component Scope
     return(
         //JSX goes in here
+        /**
+         * <div>
+         *     <Suspense fallback={<div>Loading...</div>}>
+         *         <OtherComponent />
+         *     </Suspense>
+         * </div>
+         */
     )
 }
 

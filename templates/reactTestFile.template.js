@@ -1,17 +1,32 @@
+/**
+ * Standard React test template 
+ * 
+ * Utilises ReactDOM's test utilities for more information
+ * @see https://reactjs.org/docs/test-utils.html
+ */
+
 // Import React Testing Suite
-import TestRenderer from 'react-test-renderer';
-import ShallowRenderer from 'react-test-renderer/shallow';
+import React from 'react';
+import ReactDOM from 'react-dom';
+import { act } from 'react-dom/test-utils';
 
 // Import component to test
-import ${compName} from './${compName}.jsx'
+import ${compName} from './${compName}'
 
+let container;
 
-//  Basic Test with React-test-renderer
+beforeEach(() => {
+  container = document.createElement('div');
+  document.body.appendChild(container);
+});
 
-//  it('renders correctly react-test-renderer', () => {
-//    const renderer = new ShallowRenderer();
-//      renderer.render(<Basic />);
-//   const result = renderer.getRenderOutput();
-//
-//   expect(result).toMatchSnapshot();
-// });
+afterEach(() => {
+  document.body.removeChild(container);
+  container = null;
+});
+
+it('can render', () => {
+  // Test first render and componentDidMount
+  act(() => {
+    ReactDOM.render(< ${compName} />, container);
+  });
