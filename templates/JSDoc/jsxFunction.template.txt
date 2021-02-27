@@ -5,14 +5,13 @@ import React, {  } from 'react'
 import '/${name}.${style}'
 
 /**
- * ${name} Component
- * @exports
- * @function
+ * @function ${name} Component
  * @example - Provide an example of the JSX
  * 
  * @description - Provide a description
- * 
+ * @return 
  * @namespace -Parent, children of the Component will have this as @memberOf
+ * @exports
  */ 
 
 
@@ -23,3 +22,10 @@ export default ${name} = ({props}) => {
     )
 }
 
+/**
+ * For More Information on using React Lazy Components 
+ * https://reactjs.org/docs/code-splitting.html#reactlazy
+ * For more information about using JSDocs with React Components
+ * https://react-styleguidist.js.org/docs/documenting/
+ *
+ */

@@ -1,24 +1,21 @@
-// ${name}.stories.tsx
+// Component Story - ${name}.stories.tsx
 import React from 'react';
-
+//Import Storybook
 import { Meta } from '@storybook/react';
-// Import Component to its own Story
+//Import Component
 import { ${name}, ${name}Props } from './${name}';
-
-// Export metadata controls how Storybook lists your stories and provides information used by addons
+//Export Story properties
 export default {
   title: 'Components/${name}',
-  component: Button,
+  component: ${name},
 } as Meta;
-
-// Create a “template” of how args map to rendering
+//Define a template
 const Template: Story<${name}Props> = (args) => <${name} {...args} />;
-
-// Each story then reuses that template
-export const Primary: React.VFC<{}> = () => <${name} primary>Button</${name}>;
+// Instantiate a story
+export const Primary: React.VFC<{}> = () => <${name} primary></${name}>;
 
 /**
- * Stories are based off the Storybookjs Application format
+ * Stories are based off the Storybook.js Application format
  * For more information please visit:
  * https://storybook.js.org/docs/react/writing-stories/introduction
  */

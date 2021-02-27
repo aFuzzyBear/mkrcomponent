@@ -4,10 +4,10 @@ import React from 'react';
 // Import Component to its own Story
 import { ${name} } from './${name}';
 
-// We create a “template” of how args map to rendering
+// Create a “template” of how args map to rendering
 const Template = (args) => <${name} {...args} />;
 
-//Default Story metadata
+// Default Story metadata
 export default {
     title: 'Components/${name}',
     component: ${name},
@@ -16,8 +16,13 @@ export default {
 
 // Each story then reuses that template
 export const ${name} = Template.bind({});
+
+// Defining stories
+export const Primary = () => <${name} primary label="${name}"/>;
+
+
 /**
- * Stories are based off the Storybookjs Application format
+ * Stories are based off the Storybook.js Application format
  * For more information please visit:
  * https://storybook.js.org/docs/react/writing-stories/introduction
  */

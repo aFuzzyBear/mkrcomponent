@@ -1,5 +1,5 @@
-//Component - ${name}.jsx
-import React, {  } from 'react'
+// Lazy Component - ${name}.jsx
+import React, { lazy } from 'react'
 
 import '/${name}.${style}'
 

@@ -1,19 +1,32 @@
+// Component - ${name}.tsx
+/** 
+ *  @filename: react.js 
+ *  @param {Object} FC -  Imports React Functional Component
+ */
+import React, { FC } from 'react'
+/** @filename: ${name}.${style} */
+import '/${name}.${style}'
 
-import React, { FC } from 'react';
-
+//Defining the  Prop Types
 interface ${name}Props {
-   /*
-    * title: string;
-    */
+  /**@type {} */
     
 }
 
-const ${name}: FC <${name}Props> = ({ /* Props */ }) => {
+/**
+ * @export ${name} - default
+ * @param {}
+ * @return {}
+ */
+
+export default ${name}: FC <${name}Props> = ({/** props */}) => {
   return (
     <>
       {/* JSX Goes Here */}
     </>
   );
 };
-
-export default ${name};
+/**
+ * For more information on using JSDocs With
+ * Typescript, visit: https://bit.ly/37VcSBj
+ */ 

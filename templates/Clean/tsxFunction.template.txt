@@ -7,10 +7,10 @@ interface ${name}Props {
 
 }
 
-const ${name}: FC <${name}Props> = ({ /* Props */ }) => {
+const ${name}: FC <${name}Props> = () => {
   return (
     <>
-      {/* JSX Goes Here */}
+      
     </>
   );
 };

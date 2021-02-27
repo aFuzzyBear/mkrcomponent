@@ -1,2 +1,2 @@
-/** ${name} Companion Stylesheet */
+/** Component - ${name} Stylesheet */
 

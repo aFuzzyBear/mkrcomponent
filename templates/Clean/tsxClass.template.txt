@@ -7,9 +7,8 @@ interface ${name}Props {
 
 }
 
-export default class ${name} extends Component<${name}Props> {
+class ${name} extends Component<${name}Props> {
   render() {
-    const {  } = this.props;
     return (
       <>
         
@@ -18,3 +17,4 @@ export default class ${name} extends Component<${name}Props> {
   }
 }
 
+export default ${name}

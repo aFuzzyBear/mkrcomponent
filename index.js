@@ -1,22 +1,20 @@
 #!/usr/bin/env node
 'use strict'
-/*
-*
-*          _     ______ _______                                               
-*         | |   (_____ (_______)                                          _   
-*    ____ | |  _ _____) )       ___  ____  ____   ___  ____  _____ ____ _| |_ 
-*   |    \| |_/ )  __  / |     / _ \|    \|  _ \ / _ \|  _ \| ___ |  _ (_   _)
-*   | | | |  _ (| |  \ \ |____| |_| | | | | |_| | |_| | | | | ____| | | || |_ 
-*   |_|_|_|_| \_)_|   |_\______)___/|_|_|_|  __/ \___/|_| |_|_____)_| |_| \__)
-*                                         |_| 
-*
-*                   **** Make React Component **** 
+/**
+**        _     ______ _______                                               
+**       | |   (_____ (_______)                                          _   
+**  ____ | |  _ _____) )       ___  ____  ____   ___  ____  _____ ____ _| |_ 
+** |    \| |_/ )  __  / |     / _ \|    \|  _ \ / _ \|  _ \| ___ |  _ (_   _)
+** | | | |  _ (| |  \ \ |____| |_| | | | | |_| | |_| | | | | ____| | | || |_ 
+** |_|_|_|_| \_)_|   |_\______)___/|_|_|_|  __/ \___/|_| |_|_____)_| |_| \__)
+**                                       |_| 
+* @version 1.0.0
+* @description           **** Make React Component **** 
 * mkRComponent is a utility cli application that takes a string from the user 
 * and creates a  JSX file within its own Component Folder for that named 
 * Component.
 * 
-* It outputs a template of a Standard React Component Class or Function. It comes with Template scripts for each Component type: along with options for accompanying files like associated stylesheet and test file, allowing the 
-* developer freedom of time from having to repeat the same setup for each file. 
+* It outputs a template of a Standard React Component Class or Function. It comes with Template scripts for each Component type: along with options for accompanying files like associated stylesheet, test file,storybooks and more allowing the developer freedom of time from having to repeat the same setup for each file. 
 * 
 * Path for ComponentDirectory = src/components/${componentName}/
 * componentName = userInput - string
@@ -34,16 +32,18 @@
 * 6) Output to the file-> A template to create a React Class Component
 * 7) Output to the console-> Success message and a link to the file
 *
-*  created by
-*    _     _   
-*   (c).-.(c)  
-*    / ._. \   
-*  __\( Y )/__  created by:
-* (_.-/'-'\-._)    _         _ 
-*    ||   ||    _.|_  _ _   |_) _  _.._
-*  _.' `-' '._ (_|||_|/_/_\/|_)(/_(_||  
-* (.-./`-'\.-.)           /        
-*  `-'     `-'     
+*  
+* *      _     _     
+* *     (c).-.(c)    
+* *      / ._. \     
+* *    __\( Y )/__    created by:
+* *   (_.-/'-'\-._)      _         _ 
+* *      ||   ||      _.|_  _ _   |_) _  _.._
+* *    _.' `-' '._   (_|||_|/_/_\/|_)(/_(_||  
+* *   (.-./`-'\.-.)             /        
+* *    `-'     `-'    
+* @author aFuzzyBear
+* @see https://github.com/aFuzzyBear/
 */
 
 
@@ -54,6 +54,10 @@ import util, { formatWithOptions } from 'util';
 import chalk from 'chalk';
 import { existsSync } from 'fs';
 import config from "./config.js";
+import * as writer from './bin/lib/writeFile.js';
+import * as debug from './bin/lib/debugger.js'
+
+
 const PATH = './demo/components'
 let compName = ""
 
@@ -74,7 +78,9 @@ const isWord =/([A-Z]|[a-z])\w+/gi
 /**
  * toPascalCase
  * @param {String} input 
- * @returns A string that has been converted into Pascal Case for keeping with the Naming convention required for naming Components. 
+ * @returns A string that has been converted into Pascal Case for keeping with the React Naming convention required for naming Components. 
+ * @see https://stackoverflow.com/a/53952925/13301381 
+ * @author kalicki2K @https://stackoverflow.com/users/7768064/kalicki2k 
  */
 const toPascalCase=(input)=>{
     return `${input}`
@@ -95,30 +101,16 @@ const toPascalCase=(input)=>{
  * Takes a template with object placeholders embedded within, and outputs
  * a transpiled string where the placeholders are filled with their respective 
  * attributes.
+ * @see https://stackoverflow.com/a/52818076/13301381
+ * @author muesha  @https://stackoverflow.com/users/1930509/muescha 
+ * 
  */
 const fillTemplate = (templateString, templateVars)=>{
     let func = new Function(...Object.keys(templateVars),  "return `"+templateString +"`;")
     return func(...Object.values(templateVars));
 }
 
-/**
- * @function debug_memUsage
- * Provides a memory usage summary for the existing process
- * Outputs the response to the console in Human Readable format
- */
-const debug_memUsage = ()=>{
-    //Obtains the nodejs memory for the entire process
-    const used = process.memoryUsage();
-    for (let key in used) {
-      console.log(`${key} ${Math.round(used[key] / 1024 / 1024 * 100) / 100} MB`);
-    }
-}
 
-const debug_racer = (callback)=>{
-    console.time(`${callback.constructor.name}`)
-     callback
-    console.timeEnd(`${callback.constructor.name}`)
-}
 //Questions
 
 //Event Listeners
@@ -134,7 +126,7 @@ setTimeout(()=>ac.abort(),10000)
 
 async function readTemplate(path,fileName,placholders){
     try{
-        let contents = await fsPromises.readFile(`${path}/${fileName}.template.txt`,{encoding:'utf8'})
+        let contents = await fsPromises.readFile(`${path}${fileName}.template.txt`,{encoding:'utf8'})
         let filled = await fillTemplate(contents,placholders)
         return filled
     }catch(err){
@@ -143,18 +135,18 @@ async function readTemplate(path,fileName,placholders){
 }
 
 // Write the Output file
-async function writeFile(compName,path,extension,data){
-    try {
-        let write = fsPromises.writeFile(`${path}/${name}.${extension}`,data,{
-            options:'utf-8'
-        })
-        return write
-    } catch (error) {
-        console.error('Error Writing to the file: '+ error);
-    }
-}
+// async function writeFile(name,path,extension,data){
+//     try {
+//         let write = fsPromises.writeFile(`${path}/${name}.${extension}`,data,{
+//             options:'utf-8'
+//         })
+//         return write
+//     } catch (error) {
+//         console.error('Error Writing to the file: '+ error);
+//     }
+// }
 // Make Directory
-async function mkdirectory(compName){
+async function mkdirectory(name){
     try {
             const mkdir = await fsPromises.mkdir(`${PATH}/${name}`,(err)=>{
                 if(err) throw err
@@ -184,21 +176,18 @@ let data = JSON.stringify(config,null,2)
 
 
 // Debuggers
-
-// debug_racer(capitalise('mehe'))
-// debug_racer(initCSSFuncBuffer('mehe'))
-debug_memUsage()
-
-// debug_racer(writeFile('racer',await initJSXClassBuffer('racer'),'js'))
+debug.memUsage()
 
 
 
+// Demo
 let str = "dad"
 let input = toPascalCase(str)
 let path = `${PATH}/${input}`
 
 if(!existsSync(path)) await mkdirectory(input)
 // await writeFile(input,await iniConfig(input,`${PATH}/${input}`),'json')
-fs.writeFile('./demo.json',data,(err)=>console.error(err))
-await writeFile(str,path,'css',await fileBuffer(`./templates/`,'css',{compName:str}))
+// fs.writeFile('./demo.json',data,(err)=>console.error(err))
+debug.racer(await writer.writeToFile('./demo.json',data))
+// await writeFile(str,path,'css',await fileBuffer(`./templates/`,'css',{compName:str}))
 // await writeFile(input,await initBuffer('css',input),'css')

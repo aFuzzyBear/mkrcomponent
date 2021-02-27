@@ -1,4 +1,4 @@
-<!--- ${name}.stories.mdx -->
+<!--- Component Stories - ${name}.stories.mdx -->
 
 import { Meta, Story, Canvas } from '@storybook/addon-docs/blocks';
 import { Checkbox } from './${name}';
@@ -24,6 +24,7 @@ export const Template = (args) => <${name} {...args} />
 
 
 /**
+ * Stories are based off the Storybook.js Application format
  * For more information about MDX Story Documents
  * https://storybook.js.org/docs/react/writing-docs/mdx
  */

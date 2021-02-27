@@ -5,18 +5,20 @@ import React, {Component} from 'react'
 import '/${name}.${style}'
 
 /**
- * ${name} Component
- * @exports
- * @class
+ * @class ${name} Component
+ * @classdesc - Provide a description
+ *
  * @example - Provide an example of the JSX
  * 
- * @classdesc - Provide a description
- * 
  * @namespace -Parent, children of the Component will have this as @memberOf
+ * @exports
  */ 
 
 export default class ${name} extends Component{
-    // Constructor
+    /**
+     * @constructor
+     * @param {} 
+     */
     constructor(props){
         super(props)
     }
@@ -30,3 +32,10 @@ export default class ${name} extends Component{
     }
 }
 
+/**
+ * For More Information on using React Lazy Components 
+ * https://reactjs.org/docs/code-splitting.html#reactlazy
+ * For more information about using JSDocs with React Components
+ * https://react-styleguidist.js.org/docs/documenting/
+ *
+ */

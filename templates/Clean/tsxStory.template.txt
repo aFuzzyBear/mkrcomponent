@@ -1,4 +1,4 @@
-// ${name}.stories.tsx
+// Component Story - ${name}.stories.tsx
 import React from 'react';
 
 import { Meta } from '@storybook/react';

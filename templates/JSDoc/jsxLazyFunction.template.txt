@@ -8,9 +8,8 @@ import '/${name}.${style}'
 // const OtherComponent = React.lazy(() => import('./OtherComponent'));
 
 /**
- * ${name} Component - Lazy 
+ * @function ${name} Component
  * @exports
- * @function
  * @example - Provide an example of the JSX
  * 
  * @description - Provide a description
@@ -37,5 +36,7 @@ export default ${name} = ({props}) => {
 /**
  * For More Information on using React Lazy Components 
  * https://reactjs.org/docs/code-splitting.html#reactlazy
+ * For more information about using JSDocs with React Components
+ * https://react-styleguidist.js.org/docs/documenting/
  *
  */
