@@ -1,0 +1,13 @@
+//Component - ${name}.jsx
+import React, {  } from 'react'
+
+import '/${name}.${style}'
+
+const  = React.lazy(() => import(''));
+
+export default ${name} = () => {
+    return(
+
+    )
+}
+

@@ -1,0 +1,21 @@
+//Component - ${name}.tsx
+import React, { Component } from 'react';
+
+import '/${name}.${style}'
+
+
+interface ${name}Props {
+  
+}
+
+export default  ${name} extends Component<${name}Props> {
+  render() {
+    const { } = this.props;
+    return (
+      <>
+        { }
+      </>
+    );
+  }
+}
+

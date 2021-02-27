@@ -1,13 +1,13 @@
 import React, { Component } from 'react';
 
-interface ${compName}Props {
+interface ${name}Props {
   /**
    * demoProp: string;
    * anotherProp?: string;
    */
 }
 
-class ${compName} extends Component<${compName}Props> {
+class ${name} extends Component<${name}Props> {
   render() {
     const { /** Props go in here */} = this.props;
     return (
@@ -18,4 +18,4 @@ class ${compName} extends Component<${compName}Props> {
   }
 }
 
-export default ${compName};
+export default ${name};

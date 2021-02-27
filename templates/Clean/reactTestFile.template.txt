@@ -11,7 +11,7 @@ import ReactDOM from 'react-dom';
 import { act } from 'react-dom/test-utils';
 
 // Import component to test
-import ${compName} from './${compName}'
+import ${name} from './${name}'
 
 let container;
 
@@ -28,5 +28,5 @@ afterEach(() => {
 it('can render', () => {
   // Test first render and componentDidMount
   act(() => {
-    ReactDOM.render(< ${compName} />, container);
+    ReactDOM.render(< ${name} />, container);
   });

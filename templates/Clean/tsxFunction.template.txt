@@ -1,0 +1,18 @@
+//Component - ${name}.tsx
+import React, {FC} from 'react'
+
+import '/${name}.${style}'
+
+interface ${name}Props {
+
+}
+
+const ${name}: FC <${name}Props> = ({ /* Props */ }) => {
+  return (
+    <>
+      {/* JSX Goes Here */}
+    </>
+  );
+};
+
+export default ${name};

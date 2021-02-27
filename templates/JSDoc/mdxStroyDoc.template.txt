@@ -1,18 +1,18 @@
-<!--- ${compName}.stories.mdx -->
+<!--- ${name}.stories.mdx -->
 
 import { Meta, Story, Canvas } from '@storybook/addon-docs/blocks';
-import { Checkbox } from './${compName}';
+import { Checkbox } from './${name}';
 
-<Meta title="MDX/${compName}" component={${compName}} />
+<Meta title="MDX/${name}" component={${name}} />
 
-# ${compName}
+# ${name}
 
-With `MDX` we can define a story for `${compName}` right in the middle of our
+With `MDX` we can define a story for `${name}` right in the middle of our
 Markdown documentation.
 
 <!--- This is your Story template function, shown here in React -->
 
-export const Template = (args) => <${compName} {...args} />
+export const Template = (args) => <${name} {...args} />
 
 <Canvas>
   <Story name="Unchecked" args={{ 

@@ -50,15 +50,15 @@
 //External Modules declared here
 
 import * as fsPromises from 'fs/promises';
-import util from 'util';
+import util, { formatWithOptions } from 'util';
 import chalk from 'chalk';
 import { existsSync } from 'fs';
-
+import config from "./config.js";
 const PATH = './demo/components'
 let compName = ""
 
 // Setting up Abort Controller
-
+console.log(config)
 const ac = new AbortController()
 const signal = ac.signal;;
 
@@ -132,19 +132,20 @@ setTimeout(()=>ac.abort(),10000)
 
 //Async File System Functions
 
-async function readTemplate(fileName,compName){
+async function readTemplate(path,fileName,placholders){
     try{
-        let contents = await fsPromises.readFile(`./templates/${fileName}.template.js`,{encoding:'utf8'})
-        let filled = await fillTemplate(contents,{compName:compName,})
+        let contents = await fsPromises.readFile(`${path}/${fileName}.template.txt`,{encoding:'utf8'})
+        let filled = await fillTemplate(contents,placholders)
         return filled
     }catch(err){
         console.error('Error Reading the File: '+err);
     }
 }
+
 // Write the Output file
-async function writeFile(compName,buffer,extension){
+async function writeFile(compName,path,extension,data){
     try {
-        let write = fsPromises.writeFile(`./${PATH}/${compName}/${compName}.${extension}`,buffer,{
+        let write = fsPromises.writeFile(`${path}/${name}.${extension}`,data,{
             options:'utf-8'
         })
         return write
@@ -155,7 +156,7 @@ async function writeFile(compName,buffer,extension){
 // Make Directory
 async function mkdirectory(compName){
     try {
-            const mkdir = await fsPromises.mkdir(`${PATH}/${compName}`,(err)=>{
+            const mkdir = await fsPromises.mkdir(`${PATH}/${name}`,(err)=>{
                 if(err) throw err
             })
             return mkdir
@@ -169,11 +170,17 @@ async function mkdirectory(compName){
 
 // File buffer
 
-async function initBuffer(fileName,compName){
-    return await readTemplate(fileName,compName)
+async function fileBuffer(path,fileName,placeholders){
+    return await readTemplate(path,fileName,placeholders)
+}
+async function iniConfig(fileName,path){
+    return JSON.stringify(await readFile(fileName,path))
 }
 
-
+import fs from 'fs';
+const{name,prefWritting,useJSDocs,directories:{component:componentPath}} = config
+console.log(name,prefWritting,useJSDocs,componentPath)
+let data = JSON.stringify(config,null,2)
 
 
 // Debuggers
@@ -186,11 +193,12 @@ debug_memUsage()
 
 
 
-let str = ""
+let str = "dad"
 let input = toPascalCase(str)
+let path = `${PATH}/${input}`
 
-
-if(!existsSync(`${PATH}/${input}`)) await mkdirectory(input)
-
-await writeFile(input,await initBuffer('sass',input),'scss')
-await writeFile(input,await initBuffer('css',input),'css')
+if(!existsSync(path)) await mkdirectory(input)
+// await writeFile(input,await iniConfig(input,`${PATH}/${input}`),'json')
+fs.writeFile('./demo.json',data,(err)=>console.error(err))
+await writeFile(str,path,'css',await fileBuffer(`./templates/`,'css',{compName:str}))
+// await writeFile(input,await initBuffer('css',input),'css')

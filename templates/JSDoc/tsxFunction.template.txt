@@ -1,14 +1,14 @@
 
 import React, { FC } from 'react';
 
-interface ${compName}Props {
+interface ${name}Props {
    /*
     * title: string;
     */
     
 }
 
-const ${compName}: FC <${compName}Props> = ({ /* Props */ }) => {
+const ${name}: FC <${name}Props> = ({ /* Props */ }) => {
   return (
     <>
       {/* JSX Goes Here */}
@@ -16,4 +16,4 @@ const ${compName}: FC <${compName}Props> = ({ /* Props */ }) => {
   );
 };
 
-export default ${compName};
+export default ${name};

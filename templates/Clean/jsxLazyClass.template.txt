@@ -1,0 +1,13 @@
+// ${name}.jsx
+import React, { } from 'react';
+
+import '/${name}.css'
+
+// const  = React.lazy(() => import(''));
+
+export default ${name} = () => {
+
+  return (
+
+  );
+}
