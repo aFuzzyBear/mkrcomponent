@@ -54,8 +54,9 @@ import util, { formatWithOptions } from 'util';
 import chalk from 'chalk';
 import { existsSync } from 'fs';
 import config from "./config.js";
-import * as writer from './bin/lib/writeFile.js';
+import * as writer from './bin/lib/mkRwriter.js';
 import * as debug from './bin/lib/debugger.js'
+import templateEngine from './bin/lib/templEngine.js';
 
 
 const PATH = './demo/components'
@@ -94,21 +95,7 @@ const toPascalCase=(input)=>{
       .replace(new RegExp(/\w/), s => s.toUpperCase());
 }
 
-/**
- * Template Engine
- * @param {string} templateString 
- * @param {object} templateVars 
- * Takes a template with object placeholders embedded within, and outputs
- * a transpiled string where the placeholders are filled with their respective 
- * attributes.
- * @see https://stackoverflow.com/a/52818076/13301381
- * @author muesha  @https://stackoverflow.com/users/1930509/muescha 
- * 
- */
-const fillTemplate = (templateString, templateVars)=>{
-    let func = new Function(...Object.keys(templateVars),  "return `"+templateString +"`;")
-    return func(...Object.values(templateVars));
-}
+
 
 
 //Questions

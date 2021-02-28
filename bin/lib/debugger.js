@@ -8,9 +8,13 @@
  **  \____|_____)____/|____/ \___ |\___ |_____)_|    
  **                         (_____(_____|            
  * 
- * @description A utility file containing debugging utility functions 
+ * @description A utility file containing debugging functions 
  * That are used in the development of mkRComponent. 
  * This is a named export file.
+ * 
+ * Exported Functionality:
+ * memUsage() - Outputs to the console the memory usage summary from the NodeJS process environment. 
+ * racer() - Outputs the time it takes for a function to execute to the console.
  * 
  **    _     _   
  **   (c).-.(c)  
@@ -33,7 +37,7 @@
  * And any other memory stacks that are in use. 
  * @see https://nodejs.org/api/process.html#process_process_memoryusage
  */
-export const memUsage = ()=>{
+export function memUsage(){
     //Obtains the nodejs memory for the entire process
     const used = process.memoryUsage();
     for (let key in used) {
@@ -48,9 +52,9 @@ export const memUsage = ()=>{
  * @returns  displays the time for the callback function to execute in the console. 
  * @see https://developer.mozilla.org/en-US/docs/Web/API/Console/time
  */
-export const racer = (callback)=>{
-  let str = 'Timer'
-    console.time(str)
+export function racer(callback,name){
+
+    console.time(name)
      callback
-    console.timeEnd(str)
+    console.timeEnd(name)
 }
