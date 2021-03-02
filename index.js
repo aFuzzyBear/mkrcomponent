@@ -56,7 +56,7 @@ import { existsSync } from 'fs';
 import config from "./config.js";
 import * as writer from './bin/lib/mkRwriter.js';
 import * as debug from './bin/lib/debugger.js'
-import templateEngine from './bin/lib/templEngine.js';
+import mkRengine from './bin/lib/mkRengine';
 
 
 const PATH = './demo/components'
@@ -67,33 +67,11 @@ console.log(config)
 const ac = new AbortController()
 const signal = ac.signal;;
 
-// Regex Patterns
 
-const isYes = /^y(es)?$/gi
-const isNo = /^n(o)?$/gi
-const isWord =/([A-Z]|[a-z])\w+/gi
+
+
 
 // Global Functions
-
-
-/**
- * toPascalCase
- * @param {String} input 
- * @returns A string that has been converted into Pascal Case for keeping with the React Naming convention required for naming Components. 
- * @see https://stackoverflow.com/a/53952925/13301381 
- * @author kalicki2K @https://stackoverflow.com/users/7768064/kalicki2k 
- */
-const toPascalCase=(input)=>{
-    return `${input}`
-      .replace(new RegExp(/[-_]+/, 'g'), ' ')
-      .replace(new RegExp(/[^\w\s]/, 'g'), '')
-      .replace(
-        new RegExp(/\s+(.)(\w+)/, 'g'),
-        ($1, $2, $3) => `${$2.toUpperCase() + $3.toLowerCase()}`
-      )
-      .replace(new RegExp(/\s/, 'g'), '')
-      .replace(new RegExp(/\w/), s => s.toUpperCase());
-}
 
 
 
