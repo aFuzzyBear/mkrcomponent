@@ -1,0 +1,2 @@
+/** Component - ${name} Companion Sass Stylesheet */
+

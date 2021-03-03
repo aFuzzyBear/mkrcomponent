@@ -1,0 +1,31 @@
+// Component - ${name}.jsx
+// File Imports Go Here
+import React, {  } from 'react'
+// Component Companion Stylesheet
+import '/${name}.${style}'
+
+/**
+ * @function ${name} Component
+ * @example - Provide an example of the JSX
+ * 
+ * @description - Provide a description
+ * @return 
+ * @namespace -Parent, children of the Component will have this as @memberOf
+ * @exports
+ */ 
+
+
+export default ${name} = ({props}) => {
+    //Component Scope
+    return(
+        //JSX goes in here
+    )
+}
+
+/**
+ * For More Information on using React Lazy Components 
+ * https://reactjs.org/docs/code-splitting.html#reactlazy
+ * For more information about using JSDocs with React Components
+ * https://react-styleguidist.js.org/docs/documenting/
+ *
+ */

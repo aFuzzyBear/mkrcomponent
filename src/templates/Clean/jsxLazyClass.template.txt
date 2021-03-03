@@ -1,0 +1,21 @@
+// Lazy Component - ${name}.jsx
+import React, { Component, lazy} from 'react';
+
+import '/${name}.css'
+
+// const  = React.lazy(() => import(''));
+
+class ${name} extends Component {
+  constructor(props){
+    super(props)
+  }
+  render(){
+    return(
+      <>
+
+      </>
+    )
+  }
+}
+
+export default ${name}

@@ -58,7 +58,7 @@ import {doesExist} from './gorbals.js'
         // Routes
         this.routes={
             components :'./src/Components',
-            templates :'./',
+            templates :'./Templates',
         }
 
 

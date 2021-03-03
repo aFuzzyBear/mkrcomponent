@@ -1,0 +1,22 @@
+// Component Stories - ${name}.stories.js
+import React from 'react';
+
+import { ${name} } from './${name}';
+
+export default {
+    title: 'Components/${name}',
+    component: ${name},
+  }
+
+const Template = (args) => <${name} {...args} />;
+
+export const Primary = () => <${name} primary label="${name}"/>;
+
+export const ${name} = Template.bind({});
+
+/**
+ * For more information about MDX Story Documents
+ * https://storybook.js.org/docs/react/writing-docs/mdx
+ * For more information about MDX: https://mdxjs.com/
+ *
+ */

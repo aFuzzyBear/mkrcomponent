@@ -1,0 +1,18 @@
+// Lazy Component - ${name}.tsx
+import React, { FC } from 'react';
+
+import '/${name}.${style}'
+
+interface ${name}Props {
+
+}
+
+export default ${name}: FC <${name}Props> = () => {
+  return (
+    <>
+      
+    </>
+  );
+};
+
+ ${name};
