@@ -89,16 +89,6 @@ setTimeout(()=>ac.abort(),10000)
 
 //Async File System Functions
 
-async function readTemplate(path,fileName,placholders){
-    try{
-        let contents = await fsPromises.readFile(`${path}${fileName}.template.txt`,{encoding:'utf8'})
-        let filled = await fillTemplate(contents,placholders)
-        return filled
-    }catch(err){
-        console.error('Error Reading the File: '+err);
-    }
-}
-
 // Write the Output file
 // async function writeFile(name,path,extension,data){
 //     try {
