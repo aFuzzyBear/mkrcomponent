@@ -26,23 +26,40 @@
  * @see https://github.com/aFuzzyBear/
  */ 
  
+/**
+ * @module 'fs/promises 
+ * @see https://nodejs.org/api/fs.html#fs_fs_readfile_path_options_callback
+*/
+import {readFile as asyncReadFile} from 'fs/promises'
+import { cleanPath } from './gorbals'
 
-import {readFile} from 'fs/promises'
 
- 
+/**
+ * @async ReadFromTemplate
+ * @param {String} path 
+ * @param {String} fileName 
+ * @param {Object} placeholders 
+ */
 async function readFromTemplate(path,fileName,placeholders){
     try{
-        let contents = await readFile(`${path}/${fileName}.template.txt`,{encoding:'utf8'})
+        let directory = cleanPath(path)
+        let contents = await asyncReadFile(`${directory}/${fileName}.template.txt`,{encoding:'utf8'})
         let filled = await fillTemplate(contents,placeholders)
         return filled
-    }catch(err){
-        console.error('Error Reading from the Template: '+err);
+    }catch(error){
+        console.error('Error Reading from the Template: '+error);
     }
 }
 
+/**
+ * 
+ * @param {String} path 
+ * @param {String} filename 
+ */
 async function readFromFile(path,filename){
     try {
-        return await readFile(`${path}/${filename}`,{encoding:'utf-8'})
+        let directory = cleanPath(path)
+        return await asyncReadFile(`${directory}/${filename}`,{encoding:'utf-8'})
     } catch (error) {
         console.error('Error Reading from File: '+error);
     }

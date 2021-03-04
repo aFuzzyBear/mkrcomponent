@@ -101,18 +101,6 @@ setTimeout(()=>ac.abort(),10000)
 //     }
 // }
 // Make Directory
-async function mkdirectory(name){
-    try {
-            const mkdir = await fsPromises.mkdir(`${PATH}/${name}`,(err)=>{
-                if(err) throw err
-            })
-            return mkdir
-        
-    
-    } catch (error) {
-        console.error(`Error Making the Component Directory: ${error}` )
-    }
-}
 
 
 // File buffer
