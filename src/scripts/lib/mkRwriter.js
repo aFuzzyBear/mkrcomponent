@@ -39,43 +39,43 @@
  */
 
 import {writeFile as asyncWriteFile} from 'fs/promises';
-
+import {cleanPath} from './gorbals.js'
 /**
  * @async writeComponentToFile
- * @param {String} name - Name of the Component that the file will be named after
  * @param {String} path - Path for the file to be written to
+ * @param {String} name - Name of the Component that the file will be named after
  * @param {String} extension - Provide the output file type extension
- * @param {String | Buffer | Uint8Array}  data - Data to be written to the file
- * @returns Asynchronously Writes the data to file to  path/name.extension. Replacing the file if it exists at the location.
+ * @param {String | Buffer | Uint8Array | Object}  data - Data to be written to the file
+ * @returns Asynchronously Writes the data to file to  path/name.extension. Canceling if the file already exists
  * @throws console.error('Error Writing to the file: '+ error)
  * 
  */
-async function writeComponentToFile(name,path,extension,data){
+async function writeComponentToFile(path,name,extension,data){
     try {
-        return await asyncWriteFile(`${path}/${name}.${extension}`,data,{
-            options:'utf-8'
+        let dir = cleanPath(path)
+        return await asyncWriteFile(`${dir}/${name}.${extension}`,data,{
+            encoding:'utf-8',flag:'wx'
         })
     } catch (error) {
         console.error(`Error Writing to the file: ${error}`);
     }
 }
-
 /**
  * @async writeDocToFile
- * @param {String} path 
- * @param {String | Buffer} data 
- * @return Asynchronously Writes the data to file to  path/name.extension. Replacing the file if it exists at the location.
+ * @param {String} path - Path for the file to be written to
+ * @param {String | Buffer | Uint8Array |Object} data - Data to be written to the file 
+ * @return Asynchronously Writes the data to file to  path/name.extension. 
+ * Replacing the existing file if one exists at that location
  * @throws console.error('Error Writing to the file: '+ error)
  */
 async function writeDocToFile(path,data){
     try {
-        return await asyncWriteFile(path,data,{options:'utf-8'})
+        return await asyncWriteFile(path,data,{encoding:'utf-8',flag:'w'})
         
     } catch (error) {
         console.error(`Error Writing to the file: ${error}`);
     }
 }
-
 /**
  * @exports writeComponentToFile
  * @exports writeDocToFile
