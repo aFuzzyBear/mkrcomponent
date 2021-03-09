@@ -31,20 +31,22 @@
  * @see https://nodejs.org/api/fs.html#fs_fs_readfile_path_options_callback
 */
 import {readFile as asyncReadFile} from 'fs/promises'
-import { cleanPath } from './gorbals'
+import mkREngine from './mkRengine.js'
+import { cleanPath } from './gorbals.js'
 
 
 /**
  * @async ReadFromTemplate
- * @param {String} path 
- * @param {String} fileName 
- * @param {Object} placeholders 
+ * @param {String} path Path of the file to be read
+ * @param {String} fileName - Name of the file to be read 
+ * @param {Object} placeholders Object containing the values for the template Engine to interpolate over
+ * @returns a String that has been interpolated with its placeholder values from a template file.
  */
 async function readFromTemplate(path,fileName,placeholders){
     try{
         let directory = cleanPath(path)
         let contents = await asyncReadFile(`${directory}/${fileName}.template.txt`,{encoding:'utf8'})
-        let filled = await fillTemplate(contents,placeholders)
+        let filled = await mkREngine(contents,placeholders)
         return filled
     }catch(error){
         console.error('Error Reading from the Template: '+error);
@@ -52,17 +54,22 @@ async function readFromTemplate(path,fileName,placeholders){
 }
 
 /**
- * 
- * @param {String} path 
- * @param {String} filename 
+ * @async readFromFile
+ * @param {String} path - Path of the file to be read
+ * @param {String} filename - The complete filename including file extension
+ * @returns Data String of the contents from that file
  */
 async function readFromFile(path,filename){
     try {
         let directory = cleanPath(path)
-        return await asyncReadFile(`${directory}/${filename}`,{encoding:'utf-8'})
+        let contents =  await asyncReadFile(`${directory}/${filename}`,{encoding:'utf-8'})
+        return contents
     } catch (error) {
         console.error('Error Reading from File: '+error);
     }
 }
-
+/**
+ * @exports readFromTemplate
+ * @exports readFromFile
+ */
 export {readFromTemplate,readFromFile}

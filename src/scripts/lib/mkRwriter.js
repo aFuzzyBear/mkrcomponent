@@ -37,9 +37,10 @@
  * @module 'fs/promises' {writeFile as asyncWriteFile} 
  * @see https://nodejs.org/api/fs.html#fs_fspromises_writefile_file_data_options
  */
-
 import {writeFile as asyncWriteFile} from 'fs/promises';
+import util from 'util'
 import {cleanPath} from './gorbals.js'
+
 /**
  * @async writeComponentToFile
  * @param {String} path - Path for the file to be written to
@@ -76,8 +77,19 @@ async function writeDocToFile(path,data){
         console.error(`Error Writing to the file: ${error}`);
     }
 }
+async function writeObjToFile(path,data,name='object'){
+    try {
+        return await asyncWriteFile(path,util.formatWithOptions({
+            compact: false
+        }, `const %s = %o;\nexport default %s`,name,data,name),{encoding:'utf-8',flag:'w'})
+        
+    } catch (error) {
+        console.error(`Error Writing  Object to the file: ${error}`);
+    }
+}
+
 /**
  * @exports writeComponentToFile
  * @exports writeDocToFile
  */
-export {writeComponentToFile, writeDocToFile};
+export {writeComponentToFile, writeDocToFile, writeObjToFile};

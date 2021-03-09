@@ -15,6 +15,8 @@
 
 
 import {doesExist} from './gorbals.js'
+import { readFromFile } from './mkRreader.js';
+import { writeDocToFile, writeObjToFile } from './mkRwriter.js';
 
 // const doesExist = require('./gorbals');
  export default class mkRConfig{
@@ -369,7 +371,31 @@ import {doesExist} from './gorbals.js'
         if(check(prefA,prefB) === 1) return 
         if(check(prefA,prefB) === 0) throw new TypeError('`Error, Both Preferences are the same, has to be either or, not equals.`') 
     }
-    exports(){
+    exportConfig(){
+        let exp = {
+            writing:{
+                preference:(doesExist(this.getPrefWriting))? this.getPrefWriting : 'n/a',
+                type:(doesExist(this.getPrefType)) ? this.getPrefType : 'n/a',
+            },
+            styling:{
+                preference:(doesExist(this.getPrefStyle)) ? this.getPrefStyle : 'n/a',
+            },
+            testing:{
+                preference:(doesExist(this.getPrefTest)) ? this.getPrefTest : 'n/a',
+            },
+            documentation:{
+                preference:(doesExist(this.getPrefDoc)) ? this.getPrefDoc : 'n/a',
+              
+            },
+            storytelling:{
+                preference:(doesExist(this.getPrefStory))? this.getPrefStory : 'n/a',
+            },
+        }
+         writeObjToFile('./mkRUser.config.js',exp,'mkRUser')
+        return console.log('mkRComponent User Config File has been successfully created at: \'./mkRUser.config.js\'')
+        
+    }
+    exportInternals(){
         return {
             writing:{
                 preference:(doesExist(this.getPrefWriting))? this.getPrefWriting : 'n/a',
@@ -400,20 +426,13 @@ import {doesExist} from './gorbals.js'
 
             
         }
-        
     }
  }
 
 
 
 
- let config = new mkRConfig()
-config.setWriting='jsx'
-config.setType='class'
-config.setStyling = 'css'
-config.setTests = 'y'
-config.setDocs = 'y'
-config.setStories = 'y'
-console.log(config.exports());
-
-// console.log(process.versions);
+ // const {
+ //         writing:{preference : writingPref},writing:{type: writingType},styling:{preference:prefStyle},testing:{preference : prefTest},documentation:{preference:prefDocs},storytelling:{preference:prefStory}
+ // } = mkRUser
+ 

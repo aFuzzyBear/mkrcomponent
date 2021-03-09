@@ -35,8 +35,8 @@
  * Takes a template with object placeholders embedded within, and outputs
  * a transpiled string where the placeholders are filled with their respective 
  * attributes.
+ * @author muesha
  * @see https://stackoverflow.com/a/52818076/13301381
- * @author muesha  @https://stackoverflow.com/users/1930509/muescha 
  * 
  */
 export default function mkREngine(templateString, templateVars){

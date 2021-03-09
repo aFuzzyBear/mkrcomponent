@@ -23,3 +23,38 @@
  * @see https://github.com/aFuzzyBear/
  */
  
+import * as mkRreader from './mkRreader.js'
+
+
+/**
+ * @async templateBuffer
+ * @param {String} path 
+ * @param {String} fileName 
+ * @param {Object} placeholders 
+ * @returns a string from reading the file from a template, where the values have already been interpolated.
+ */
+async function templateBuffer(path,fileName,placeholders){
+    return await mkRreader.readFromTemplate(path,fileName,placeholders)
+}
+
+/**
+ * @async fileBuffer
+ * @param {String} path 
+ * @param {String} fileName 
+ * @returns A String from reading the file directly from a locations.
+ */
+async function fileBuffer(path,fileName){
+    return await mkRreader.readFromFile(path,fileName)
+}
+
+/**
+ * @async objectBuffer
+ * @param {Object} object 
+ * @returns String from an object by taking an object and Stringifies it using JSON.stringify
+ */
+async function objectBuffer(object){
+    return JSON.stringify(object,null,2)
+}
+
+export {templateBuffer,fileBuffer,objectBuffer}
+

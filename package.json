@@ -5,7 +5,7 @@
   "main": "index.js",
   "type": "module",
   "scripts": {
-    "mkrcomp":"node ./index.js",
+    "mkrcomp": "node ./index.js",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "repository": {
@@ -24,15 +24,8 @@
   },
   "homepage": "https://github.com/aFuzzyBear/mkrcomponent#readme",
   "dependencies": {
-    "chalk": "^4.1.0",
-    "commander": "^7.1.0"
+    "commander": "^7.1.0",
+    "inquirer": "^8.0.0"
   },
-  "devDependencies": {
-    "eslint": "^7.20.0",
-    "eslint-config-standard": "^16.0.2",
-    "eslint-plugin-import": "^2.22.1",
-    "eslint-plugin-node": "^11.1.0",
-    "eslint-plugin-promise": "^4.3.1",
-    "eslint-plugin-react": "^7.22.0"
-  }
+  "devDependencies": {}
 }
