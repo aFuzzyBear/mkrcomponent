@@ -77,6 +77,8 @@ async function writeDocToFile(path,data){
         console.error(`Error Writing to the file: ${error}`);
     }
 }
+
+
 async function writeObjToFile(path,data,name='object'){
     try {
         return await asyncWriteFile(path,util.formatWithOptions({
@@ -87,6 +89,8 @@ async function writeObjToFile(path,data,name='object'){
         console.error(`Error Writing  Object to the file: ${error}`);
     }
 }
+// writeObjToFile('./demo.demo.js',{test:'test'},'demo')
+
 
 /**
  * @exports writeComponentToFile

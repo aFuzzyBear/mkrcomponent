@@ -1,7 +1,7 @@
 const mkRUser = {
   writing: {
     preference: 'jsx',
-    type: 'class'
+    type: 'function'
   },
   styling: {
     preference: 'css'
