@@ -391,8 +391,8 @@ import { writeDocToFile, writeObjToFile } from './mkRwriter.js';
                 preference:(doesExist(this.getPrefStory))? this.getPrefStory : 'n/a',
             },
         }
-         writeObjToFile('./mkRUser.config.js',exp,'mkRUser')
-        return console.log('mkRComponent User Config File has been successfully created at: \'./mkRUser.config.js\'')
+         return writeObjToFile('./mkRComponent.config.js',exp,'mkRComponent').then(console.log('mkRComponent User Config File has been successfully created at: \'./mkRUser.config.js\''))
+        // return console.log('mkRComponent User Config File has been successfully created at: \'./mkRUser.config.js\'')
         
     }
     exportInternals(){
