@@ -15,8 +15,7 @@
 
 
 import {doesExist} from './gorbals.js'
-import { readFromFile } from './mkRreader.js';
-import { writeDocToFile, writeObjToFile } from './mkRwriter.js';
+import {writeObjToFile } from './mkRwriter.js';
 
 // const doesExist = require('./gorbals');
  export default class mkRConfig{
@@ -59,8 +58,8 @@ import { writeDocToFile, writeObjToFile } from './mkRwriter.js';
         this.prefDoc
         // Routes
         this.routes={
-            components :'./src/Components',
-            templates :'./Templates',
+            components :'src/Components',
+            templates :'src/templates/Components',
         }
 
 
@@ -391,7 +390,7 @@ import { writeDocToFile, writeObjToFile } from './mkRwriter.js';
                 preference:(doesExist(this.getPrefStory))? this.getPrefStory : 'n/a',
             },
         }
-         return writeObjToFile('./mkRComponent.config.js',exp,'mkRComponent').then(console.log('mkRComponent User Config File has been successfully created at: \'./mkRUser.config.js\''))
+         return writeObjToFile('./mkR.config.js',exp,'mkR').then(console.log('mkR User Config File has been successfully created at: \'./mkR.config.js\''))
         // return console.log('mkRComponent User Config File has been successfully created at: \'./mkRUser.config.js\'')
         
     }
@@ -423,9 +422,21 @@ import { writeDocToFile, writeObjToFile } from './mkRwriter.js';
                 preference:(doesExist(this.getPrefStory))? this.getPrefStory : 'n/a',
                 story : (doesExist(this.getSTORY))? this.getSTORY : 'n/a',
             },
-
+            routes:{
+                component: this.routes.components,
+                templates: this.routes.templates
+            }
             
         }
+    }
+    interface(obj){
+        this.setWriting = obj.writing.preference
+        this.setType = obj.writing.type
+        this.setStyling = obj.styling.preference
+        this.setTests = obj.testing.preference
+        this.setDocs = obj.documentation.preference
+        this.setStories = obj.storytelling.preference
+
     }
  }
 

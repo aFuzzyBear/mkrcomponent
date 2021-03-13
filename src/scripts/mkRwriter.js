@@ -78,8 +78,19 @@ async function writeDocToFile(path,data){
     }
 }
 
-
-async function writeObjToFile(path,data,name='object'){
+/**
+ * @async writeDocToFile
+ * @param {String} path - Path for the file to be written to, including file extension
+ * @param {String | Buffer | Uint8Array | Object} data - Data to be written to the file 
+ * @param {String} name - Name of the Variable for the File to be labeled in the Export. 
+ * @return Asynchronously Writes the data to file to  path/name.extension. 
+ * Replacing the existing file if one exists at that location
+ * @throws console.error('Error Writing to the file: '+ error)
+ * @example
+ *  Exports a file to the destination path, 
+ *  
+ */
+async function writeJSObjToFile(path,data,name='object'){
     try {
         return await asyncWriteFile(path,util.formatWithOptions({
             compact: false
@@ -89,11 +100,10 @@ async function writeObjToFile(path,data,name='object'){
         console.error(`Error Writing  Object to the file: ${error}`);
     }
 }
-// writeObjToFile('./demo.demo.js',{test:'test'},'demo')
-
 
 /**
  * @exports writeComponentToFile
  * @exports writeDocToFile
+ * @exports writeObjToFile
  */
-export {writeComponentToFile, writeDocToFile, writeObjToFile};
+export {writeComponentToFile, writeDocToFile, writeJSObjToFile as writeObjToFile};

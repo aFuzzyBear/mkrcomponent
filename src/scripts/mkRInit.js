@@ -1,13 +1,8 @@
-import { createRequire } from "module";
 import mkRConfig from "./mkRconfig.js";
-const require = createRequire(import.meta.url)
-
-const inquirer = require('inquirer')
+import inquirer from 'inquirer'
 
 // Setup Prompts
 const prompt_init = inquirer.createPromptModule()
-const prompt_exit = inquirer.createPromptModule()
-
 
 // Options
 const options_writing = ['jsx','tsx']
@@ -88,42 +83,46 @@ const questions_exit=[
 
 let userSetup = new mkRConfig()
 
-prompt_init(questions_setup).then(answers=>{
-    if(answers.prefWriting){
-        userSetup.setWriting = answers.prefWriting
-    }
-    if(answers.prefType){
-        userSetup.setType= answers.prefType
-    }
-    if(answers.prefStyle){
-        userSetup.setStyling = answers.prefStyle
-    }
-    if(answers.prefTest){
-        userSetup.setTests = answers.prefTest
-    }
-    if(answers.prefDocs){
-        userSetup.setDocs = answers.prefDocs
-    }
-    if(answers.prefStories){
-        userSetup.setStories = answers.prefStories
-    }
-    if(answers.save === 'yes'){
-        userSetup.exportConfig().then(console.log('Setup Configuration has been successfully saved:  ')).catch(err=>console.error(err))
-    }
-    else if(answers.save === 'no'){
-        inquirer.prompt(questions_exit[0]).then(ans=>{
-            if(ans.restart === 'yes'){
-               return prompt_init(questions_setup)
-            }
-            else if(ans.restart === 'no'){
-                inquirer.prompt(questions_exit[1]).then(res=>{
-                    if(res.quit === 'yes'){
-                        return process.exit(0)
-                    }else if (res.quit === 'no'){
-                        return prompt_init(questions_setup)
-                    }
-                })
-            }
-        })
-    }
-})
+function mkRSetup(){
+    prompt_init(questions_setup).then(answers=>{
+        if(answers.prefWriting){
+            userSetup.setWriting = answers.prefWriting
+        }
+        if(answers.prefType){
+            userSetup.setType= answers.prefType
+        }
+        if(answers.prefStyle){
+            userSetup.setStyling = answers.prefStyle
+        }
+        if(answers.prefTest){
+            userSetup.setTests = answers.prefTest
+        }
+        if(answers.prefDocs){
+            userSetup.setDocs = answers.prefDocs
+        }
+        if(answers.prefStories){
+            userSetup.setStories = answers.prefStories
+        }
+        if(answers.save === 'yes'){
+            userSetup.exportConfig().then(console.log('Setup Configuration has been successfully saved:  ')).catch(err=>console.error(err))
+        }
+        else if(answers.save === 'no'){
+            inquirer.prompt(questions_exit[0]).then(ans=>{
+                if(ans.restart === 'yes'){
+                   return prompt_init(questions_setup)
+                }
+                else if(ans.restart === 'no'){
+                    inquirer.prompt(questions_exit[1]).then(res=>{
+                        if(res.quit === 'yes'){
+                            return process.exit(0)
+                        }else if (res.quit === 'no'){
+                            return prompt_init(questions_setup)
+                        }
+                    })
+                }
+            })
+        }
+    })
+    
+}
+export default mkRSetup

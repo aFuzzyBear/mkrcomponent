@@ -119,3 +119,10 @@ export function doesExist(variable){
     }
 }
 
+export async function extrapolate(obj){
+    let {default:mkRConfig} = await import('./mkRconfig.js')
+    let setup = new mkRConfig()
+    setup.interface(obj)
+    return setup.exportInternals()
+
+}

@@ -1,7 +1,7 @@
 {
   "name": "mkrcomponent",
   "version": "1.0.0",
-  "description": "A small CLI utility application that allows you to quickly make either a React Class Component or a Functional Component. Enter the name of the Component and the type you wish to make. The application would create the relevent folder structure found in React for handling src components. It would also creates the accompanying component stylesheet and test file within its component directory.",
+  "description": "A small CLI utility application that allows you to quickly make either a React Class Component or a Functional Component. Enter the name of the Component and its Type you wish to make. The application would create the relevant folder structure found in React for handling src components. It would also creates the accompanying component stylesheet and test file within its component directory.",
   "main": "index.js",
   "type": "module",
   "scripts": {

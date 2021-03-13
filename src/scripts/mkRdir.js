@@ -64,5 +64,3 @@ async function mkRdir(path,name){
 }
 
 export default mkRdir
-
-mkRdir('./test/test/test','mehe')

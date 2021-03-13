@@ -1,5 +1,8 @@
 #!/usr/bin/env node
 'use strict'
+
+import mkRComp from "./src/scripts/mkRComp.js"
+
 /**
 **        _     ______ _______                                               
 **       | |   (_____ (_______)                                          _   
@@ -46,91 +49,4 @@
 * @see https://github.com/aFuzzyBear/
 */
 
-
-//External Modules declared here
-
-import * as fsPromises from 'fs/promises';
-import util, { formatWithOptions } from 'util';
-import chalk from 'chalk';
-import { existsSync } from 'fs';
-import config from "./config.js";
-import * as writer from './bin/lib/mkRwriter.js';
-import * as debug from './bin/lib/debugger.js'
-import mkRengine from './bin/lib/mkRengine';
-
-
-const PATH = './demo/components'
-let compName = ""
-
-// Setting up Abort Controller
-console.log(config)
-const ac = new AbortController()
-const signal = ac.signal;;
-
-
-
-
-
-// Global Functions
-
-
-
-
-//Questions
-
-//Event Listeners
-signal.addEventListener('abort',()=>{
-    console.log('❎ mkRComponent has died of natural causes...😔 ')
-},{once:true})
-
-//SetTimeout to abort application after a 2 minute idle time period
-
-setTimeout(()=>ac.abort(),10000)
-
-//Async File System Functions
-
-// Write the Output file
-// async function writeFile(name,path,extension,data){
-//     try {
-//         let write = fsPromises.writeFile(`${path}/${name}.${extension}`,data,{
-//             options:'utf-8'
-//         })
-//         return write
-//     } catch (error) {
-//         console.error('Error Writing to the file: '+ error);
-//     }
-// }
-// Make Directory
-
-
-// File buffer
-
-async function fileBuffer(path,fileName,placeholders){
-    return await readTemplate(path,fileName,placeholders)
-}
-async function iniConfig(fileName,path){
-    return JSON.stringify(await readFile(fileName,path))
-}
-
-import fs from 'fs';
-const{name,prefWritting,useJSDocs,directories:{component:componentPath}} = config
-console.log(name,prefWritting,useJSDocs,componentPath)
-let data = JSON.stringify(config,null,2)
-
-
-// Debuggers
-debug.memUsage()
-
-
-
-// Demo
-let str = "dad"
-let input = toPascalCase(str)
-let path = `${PATH}/${input}`
-
-if(!existsSync(path)) await mkdirectory(input)
-// await writeFile(input,await iniConfig(input,`${PATH}/${input}`),'json')
-// fs.writeFile('./demo.json',data,(err)=>console.error(err))
-debug.racer(await writer.writeToFile('./demo.json',data))
-// await writeFile(str,path,'css',await fileBuffer(`./templates/`,'css',{compName:str}))
-// await writeFile(input,await initBuffer('css',input),'css')
+mkRComp('mehe')

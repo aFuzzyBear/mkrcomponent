@@ -1,7 +1,7 @@
-const mkRUser = {
+const mkR = {
   writing: {
     preference: 'jsx',
-    type: 'function'
+    type: 'class'
   },
   styling: {
     preference: 'css'
@@ -16,4 +16,4 @@ const mkRUser = {
     preference: 'yes'
   }
 };
-export default mkRUser
+export default mkR
