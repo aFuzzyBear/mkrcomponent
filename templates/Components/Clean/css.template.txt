@@ -1,2 +1,2 @@
-/** Component - ${name} Stylesheet */
+/** ${name}.css */
 

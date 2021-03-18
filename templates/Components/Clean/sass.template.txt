@@ -1,1 +1,1 @@
-/** Component - ${name} - Sass Stylesheet */
+/** ${name}.sass -  Stylesheet */

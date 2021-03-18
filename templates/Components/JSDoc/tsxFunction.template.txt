@@ -1,4 +1,4 @@
-// Component - ${name}.tsx
+// ${name}.tsx
 /** 
  *  @filename: react.js 
  *  @param {Object} FC -  Imports React Functional Component
@@ -15,7 +15,7 @@ interface ${name}Props {
 
 /**
  * @export ${name} - default
- * @param {}
+ * @props {}
  * @return {}
  */
 

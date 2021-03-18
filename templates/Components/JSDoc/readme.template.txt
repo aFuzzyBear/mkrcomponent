@@ -1,4 +1,4 @@
-<!--- ${name} Component ReadMe.md File -->
+<!--- ${name}-readme.md -->
 # ${name} Component ReadMe File
 
 

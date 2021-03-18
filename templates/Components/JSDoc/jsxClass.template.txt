@@ -1,23 +1,18 @@
-// Component - ${name}.jsx
-// File Imports Go Here
+// ${name}.jsx
 import React, {Component} from 'react'
-// Component Companion Stylesheet
+// Stylesheet
 import '/${name}.${style}'
 
 /**
  * @class ${name} Component
  * @classdesc - Provide a description
  *
- * @example - Provide an example of the JSX
- * 
- * @namespace -Parent, children of the Component will have this as @memberOf
- * @exports
  */ 
 
 export default class ${name} extends Component{
     /**
      * @constructor
-     * @param {} 
+     * @props {} 
      */
     constructor(props){
         super(props)

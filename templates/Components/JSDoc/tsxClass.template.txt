@@ -1,4 +1,4 @@
-// Component - ${name}.tsx
+// ${name}.tsx
 /** 
  *  @filename: react.js 
  *  @param {Object} Component -  Imports React Component
@@ -14,10 +14,7 @@ interface ${name}Props {
 
 /**
  * @class ${name} - Component
- * @template react
- * @extends {Component}
- * @constructor 
- * @param {} 
+ * @props {} 
  * @return {}
  */
 class ${name} extends Component<${name}Props> {

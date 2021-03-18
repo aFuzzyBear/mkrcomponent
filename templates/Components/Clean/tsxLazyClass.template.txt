@@ -11,7 +11,7 @@ export default  ${name} extends Component<${name}Props> {
   render() {
     return (
       <>
-        { }
+     
       </>
     );
   }

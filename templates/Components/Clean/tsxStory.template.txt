@@ -14,3 +14,8 @@ const Template: Story<${name}Props> = (args) => <${name} {...args} />;
 
 export const Primary: React.VFC<{}> = () => <${name} primary>Button</${name}>;
 
+/**
+ * Stories are based off the Storybook.js Application format
+ * For more information please visit:
+ * https://storybook.js.org/docs/react/writing-stories/introduction
+ */

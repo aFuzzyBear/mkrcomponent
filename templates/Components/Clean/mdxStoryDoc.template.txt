@@ -1,4 +1,4 @@
-<!--- Component Stories -${name}.stories.mdx -->
+<!--- ${name}.stories.mdx -->
 
 import { Meta, Story, Canvas } from '\@storybook/addon-docs/blocks';
 import { ${name} } from './${name}';

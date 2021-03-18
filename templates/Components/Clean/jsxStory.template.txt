@@ -1,4 +1,4 @@
-// Component Stories - ${name}.stories.js
+//${name}.stories.js
 import React from 'react';
 
 import { ${name} } from './${name}';

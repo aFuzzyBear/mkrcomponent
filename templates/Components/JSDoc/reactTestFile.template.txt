@@ -1,5 +1,5 @@
 /**
- * Component - ${name} Test File
+ * ${name}.test.js
  */
 
 // Import React Testing Suite
@@ -7,7 +7,7 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import { act } from 'react-dom/test-utils';
 
-// Import component to test
+// Import ${name} to test
 import ${name} from './${name}'
 
 

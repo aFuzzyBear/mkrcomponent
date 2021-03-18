@@ -58,11 +58,3 @@ export function racer(callback,name){
      callback()
     console.timeEnd(name)
 }
-export async function timer(callback){
-  let time
-  let parser =(hrtime)=>(hrtime[0] + (hrtime[1] / 1e9)).toFixed(3);
-  const start = process.hrtime()
-   callback()
-   return time = parser(process.hrtime(start))
-  
-}

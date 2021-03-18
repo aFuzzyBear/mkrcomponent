@@ -1,20 +1,18 @@
-// Lazy Component - ${name}.jsx
+// ${name}.jsx - Lazy
 // File Imports Go Here
 import React, {} from 'react'
-// Component Companion Stylesheet
+// Stylesheet
 import '/${name}.${style}'
 
 // Lazy load from external component
 // const OtherComponent = React.lazy(() => import('./OtherComponent'));
 
 /**
- * @function ${name} Component
- * @exports
- * @example - Provide an example of the JSX
- * 
+ * @function ${name} 
+ * @props {}
+ * @returns - example of the JSX
  * @description - Provide a description
  * 
- * @namespace -Parent, children of the Component will have this as @memberOf
  */ 
 
 

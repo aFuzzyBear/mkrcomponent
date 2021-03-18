@@ -1,2 +1,2 @@
-/** Component - ${name} Companion Sass Stylesheet */
+/** ${name}.sass - Stylesheet */
 

@@ -1,32 +1,33 @@
-// Lazy Component - ${name}.jsx
-// File Imports Go Here
+// ${name}.jsx -Lazy
+
 import React, { Suspense } from 'react'
-// Component Companion Stylesheet
+// Stylesheet
 import '/${name}.${style}'
 
-// React.lazy() construct
+// Lazy load from external component
 // const OtherComponent = React.lazy(() => import('./OtherComponent'));
 
 /**
- * ${name} Component - Lazy 
- * @exports
- * @class
- * @example - Provide an example of the JSX
- * 
+ * @class ${name} Component - Lazy 
  * @classdesc - Provide a description
  * 
- * @namespace -Parent, children of the Component will have this as @memberOf
+ * @example - Provide an example of the JSX
  */ 
-export default ${name} = ({/*props*/}) => {
-  //Component Scope
-  return (
-    //JSX goes in here
-    // <div>
-    //   <Suspense fallback={<div>Loading...</div>}>
-    //     <OtherComponent />
-    //   </Suspense>
-    // </div>
-  );
+export default class ${name} {
+  constructor(props){
+    super(props)
+  }
+  render(){
+     return (
+      //JSX goes in here
+      // <div>
+      //   <Suspense fallback={<div>Loading...</div>}>
+      //     <OtherComponent />
+      //   </Suspense>
+      // </div>
+    );
+
+  }
 }
 
 /**

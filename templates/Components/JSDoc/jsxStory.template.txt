@@ -1,7 +1,7 @@
-// Story - ${name}.stories.js
+// ${name}.stories.js
 import React from 'react';
 
-// Import Component to its own Story
+// Import ${name} to its own Story
 import { ${name} } from './${name}';
 
 // Create a “template” of how args map to rendering

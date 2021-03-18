@@ -1,8 +1,12 @@
 #!/bin/env node
 'use strict'
-import { display_output, display_preference, display_success, title_text } from './console.js'
-import { cleanPath, createComponent, inputValidation, } from './gorbals.js'
-import mkRdir from './mkRdir.js'
+// import { display_output, display_preference, display_success, title_text } from './console.js'
+const { display_output, display_preference, display_success, title_text } = await import('./console.js')
+
+// import { cleanPath, createComponent} from './gorbals.js'
+const{ cleanPath, createComponent, getInternals} = await import('./gorbals.js')
+// import mkRdir from './mkRdir.js'
+const{default:mkRdir} = await import('./mkRdir.js')
 /**
  * Wrapper Functions
  * Steps:
@@ -60,7 +64,7 @@ async function decisionTree(values,info){
     }
     if(values.storytelling.story && values.documentation.docs){
         ext = `mdx`
-       await createComponent(info,'mdxStory',ext,`${info.placeholder.name}-readme`)
+       await createComponent(info,'mdx',ext,`${info.placeholder.name}-readme`)
         .then(display_preference('MDX Readme',`${info.path_dir}/${info.placeholder.name}.${ext}`))
     }
     if(values.storytelling.story && values.writing.jsx){
@@ -90,10 +94,10 @@ async function decisionTree(values,info){
 async function mkRComponent(name){
     //Setting up the function timer
     let time, start= process.hrtime()
-    let parser =(hrtime)=>(hrtime[0] + (hrtime[1] / 1e9)).toFixed(3);
+    let parser =(hrtime)=>(hrtime[0] + (hrtime[1] / 1e6)).toFixed(0);
     // User Settings
-    const {getInternals:settings} = await import('./gorbals.js')
-    const config = await settings()
+    // const {getInternals:internals} = await import('./gorbals.js')
+    const config = await getInternals()
     display_output(title_text)
     //1) Make Directory For the Component
     await mkRdir(cleanPath(config.routes.component),name)
@@ -110,7 +114,7 @@ async function mkRComponent(name){
     await decisionTree(config,info)
     // 3) Display animation then success story
     time = parser(process.hrtime(start))
-    display_success('⏱️\    That took you all of: ' + time + 'ms  🤯')
+    display_success('⏱️\    That took you all of: ' + time + 'ms 🤯')
 }
 
 

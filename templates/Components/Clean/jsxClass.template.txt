@@ -1,4 +1,4 @@
-//Component - ${name}.jsx
+//${name}.jsx
 import React, {Component} from 'react'
 
 import '/${name}.${style}'

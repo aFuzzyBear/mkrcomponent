@@ -1,7 +1,6 @@
 import { Command } from "commander";
 import mkRSetup from "../scripts/mkRInit.js";
 import { checkConfig, inputValidation } from "./gorbals.js";
-import {timer} from './debugger.js'
 import mkRComponent from './mkRComp.js'
 import { display_success } from "./console.js";
 const mkRProgram = new Command()

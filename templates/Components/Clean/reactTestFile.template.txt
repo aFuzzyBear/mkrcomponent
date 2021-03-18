@@ -1,11 +1,9 @@
-// Test Component ${name}.test.js 
+// ${name}.test.js 
 
-// Import React Testing Suite
 import React from 'react';
 import ReactDOM from 'react-dom';
 import { act } from 'react-dom/test-utils';
 
-// Import component to test
 import ${name} from './${name}'
 
 
