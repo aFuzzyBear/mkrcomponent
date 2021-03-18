@@ -1,16 +1,16 @@
 /** Component Stories - ${name}.stories.mdx */
 
-import { Meta, Story, Canvas } from '@storybook/addon-docs/blocks';
+import { Meta, Story, Canvas } from \' @storybook\/addon-docs\/blocks\;
 import { Checkbox } from './${name}';
 
 <Meta title="MDX/${name}" component={ ${name} } />
 
 # ${name}
 
-With `MDX` we can define a story for ` ${name} ` right in the middle of our
+With 'MDX' we can define a story for ' ${name} ' right in the middle of our
 Markdown documentation.
 
-/** This is your Story template function, shown here in React */
+<!--- This is your Story template function, shown here in React -->
 
 export const Template = (args) => < ${name} {...args} />
 

@@ -39,6 +39,7 @@
  */
 import {writeFile as asyncWriteFile} from 'fs/promises';
 import util from 'util'
+import { display_error } from './console.js';
 import {cleanPath} from './gorbals.js'
 
 /**
@@ -48,7 +49,7 @@ import {cleanPath} from './gorbals.js'
  * @param {String} extension - Provide the output file type extension
  * @param {String | Buffer | Uint8Array | Object}  data - Data to be written to the file
  * @returns Asynchronously Writes the data to file to  path/name.extension. Canceling if the file already exists
- * @throws console.error('Error Writing to the file: '+ error)
+ * @throws display_error('Error Writing to the file: '+ error)
  * 
  */
 async function writeComponentToFile(path,name,extension,data){
@@ -58,7 +59,7 @@ async function writeComponentToFile(path,name,extension,data){
             encoding:'utf-8',flag:'wx'
         })
     } catch (error) {
-        console.error(`Error Writing to the file: ${error}`);
+        display_error(`Error Writing to the file: ${error}`);
     }
 }
 /**
@@ -67,14 +68,14 @@ async function writeComponentToFile(path,name,extension,data){
  * @param {String | Buffer | Uint8Array |Object} data - Data to be written to the file 
  * @return Asynchronously Writes the data to file to  path/name.extension. 
  * Replacing the existing file if one exists at that location
- * @throws console.error('Error Writing to the file: '+ error)
+ * @throws display_error('Error Writing to the file: '+ error)
  */
 async function writeDocToFile(path,data){
     try {
         return await asyncWriteFile(path,data,{encoding:'utf-8',flag:'w'})
         
     } catch (error) {
-        console.error(`Error Writing to the file: ${error}`);
+        display_error(`Error Writing to the file: ${error}`);
     }
 }
 
@@ -85,7 +86,7 @@ async function writeDocToFile(path,data){
  * @param {String} name - Name of the Variable for the File to be labeled in the Export. 
  * @return Asynchronously Writes the data to file to  path/name.extension. 
  * Replacing the existing file if one exists at that location
- * @throws console.error('Error Writing to the file: '+ error)
+ * @throws display_error('Error Writing to the file: '+ error)
  * @example
  *  Exports a file to the destination path, 
  *  
@@ -97,7 +98,7 @@ async function writeJSObjToFile(path,data,name='object'){
         }, `const %s = %o;\nexport default %s`,name,data,name),{encoding:'utf-8',flag:'w'})
         
     } catch (error) {
-        console.error(`Error Writing  Object to the file: ${error}`);
+        display_error(`Error Writing  Object to the file: ${error}`);
     }
 }
 

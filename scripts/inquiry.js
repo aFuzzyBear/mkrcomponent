@@ -1,17 +1,22 @@
-import mkRConfig from "./mkRconfig.js";
 import inquirer from 'inquirer'
 
-// Setup Prompts
-const prompt_init = inquirer.createPromptModule()
 
 // Options
 const options_writing = ['jsx','tsx']
 const options_type = ['class','function']
 const options_styling = ['css','sass']
 const options_yesNo = ['yes','no']
-
+// Setup Prompts
+export const questionnaire = inquirer.createPromptModule()
 // Questions
-const questions_setup = [
+export const questions_setup = [
+    {
+        name:'Run',
+        type:'list',
+        message:'Do you wish to Run the Initialisation Setup?',
+        choices:options_yesNo,
+        default:'yes'
+    },
     {
         name:'prefWriting',
         type:'list',
@@ -62,7 +67,7 @@ const questions_setup = [
         default:'yes'
     },
 ]
-const questions_exit=[
+export const questions_utility=[
     {
         name:'restart',
         type:'list',
@@ -77,52 +82,12 @@ const questions_exit=[
         choices:options_yesNo,
         default:'yes'
     },
+    {
+        name:'Run',
+        type:'list',
+        message:'Do you wish to Run the Initialisation Setup?',
+        choices:['yes','no'],
+        default:'yes'
+    }
     
 ]
-
-
-let userSetup = new mkRConfig()
-
-function mkRSetup(){
-    prompt_init(questions_setup).then(answers=>{
-        if(answers.prefWriting){
-            userSetup.setWriting = answers.prefWriting
-        }
-        if(answers.prefType){
-            userSetup.setType= answers.prefType
-        }
-        if(answers.prefStyle){
-            userSetup.setStyling = answers.prefStyle
-        }
-        if(answers.prefTest){
-            userSetup.setTests = answers.prefTest
-        }
-        if(answers.prefDocs){
-            userSetup.setDocs = answers.prefDocs
-        }
-        if(answers.prefStories){
-            userSetup.setStories = answers.prefStories
-        }
-        if(answers.save === 'yes'){
-            userSetup.exportConfig().then(console.log('Setup Configuration has been successfully saved:  ')).catch(err=>console.error(err))
-        }
-        else if(answers.save === 'no'){
-            inquirer.prompt(questions_exit[0]).then(ans=>{
-                if(ans.restart === 'yes'){
-                   return prompt_init(questions_setup)
-                }
-                else if(ans.restart === 'no'){
-                    inquirer.prompt(questions_exit[1]).then(res=>{
-                        if(res.quit === 'yes'){
-                            return process.exit(0)
-                        }else if (res.quit === 'no'){
-                            return prompt_init(questions_setup)
-                        }
-                    })
-                }
-            })
-        }
-    })
-    
-}
-export default mkRSetup

@@ -13,7 +13,7 @@ const mkR = {
     preference: 'yes'
   },
   storytelling: {
-    preference: 'yes'
+    preference: 'no'
   }
 };
 export default mkR

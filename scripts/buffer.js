@@ -36,7 +36,7 @@ import * as mkRreader from './mkRreader.js'
 async function templateBuffer(path,fileName,placeholders){
     return await mkRreader.readFromTemplate(path,fileName,placeholders)
 }
-console.log(await templateBuffer('src/templates/Components/JSDoc','mdx',{name:'demo'}));
+
 /**
  * @async fileBuffer
  * @param {String} path 

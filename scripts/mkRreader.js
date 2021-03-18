@@ -33,7 +33,7 @@
 import {readFile as asyncReadFile} from 'fs/promises'
 import mkREngine from './mkRengine.js'
 import { cleanPath } from './gorbals.js'
-
+import {display_error} from './console.js'
 
 /**
  * @async ReadFromTemplate
@@ -49,7 +49,7 @@ async function readFromTemplate(path,fileName,placeholders){
         let filled = await mkREngine(contents,placeholders)
         return filled
     }catch(error){
-        console.error('Error Reading from the Template: '+error);
+        display_error('Error Reading from the Template: '+error);
     }
 }
 
@@ -65,7 +65,7 @@ async function readFromFile(path,filename){
         let contents =  await asyncReadFile(`${directory}/${filename}`,{encoding:'utf-8'})
         return contents
     } catch (error) {
-        console.error('Error Reading from File: '+error);
+        display_error('Error Reading from File: '+error);
     }
 }
 /**

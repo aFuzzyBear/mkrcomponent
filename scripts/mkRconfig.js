@@ -13,7 +13,7 @@
  * 
  */
 
-
+import{display_error, display_success} from './console.js'
 import {doesExist} from './gorbals.js'
 import {writeObjToFile } from './mkRwriter.js';
 
@@ -59,7 +59,7 @@ import {writeObjToFile } from './mkRwriter.js';
         // Routes
         this.routes={
             components :'src/Components',
-            templates :'src/templates/Components',
+            templates :'templates/Components',
         }
 
 
@@ -205,14 +205,13 @@ import {writeObjToFile } from './mkRwriter.js';
                     this.#setPrefWriting = 'tsx'                    
                     break
                 default:
-                    throw new SyntaxError(`Config.SetWriting:Wrong argument entered: ${value} `)
+                    throw new SyntaxError(`Wrong argument entered: ${value} `)
                     
                 }
                 this.checkPrefs(this.#jsx,this.#tsx)
-                console.log(`User Writing preference set to: ${this.getPrefWriting}`)
 
         } catch (error) {
-            console.error('Error located within Config.setWriting:'+error);
+            display_error('Error located within Config.setWriting:'+error);
         }
 
     }
@@ -231,12 +230,12 @@ import {writeObjToFile } from './mkRwriter.js';
                 this.#setPrefStyle = 'sass'
                 break;
                 default:
-                throw new SyntaxError(`Config.SetStyling:Wrong argument entered: ${value} `)
+                throw new SyntaxError(`Wrong argument entered: ${value} `)
             }
             this.checkPrefs(this.#css,this.#sass)
-            console.log(`User Styling preference set to: ${this.getPrefStyle}`)
+            
         } catch (error) {
-            console.error('Error located within Config.setStyling: '+error);
+            display_error('Error located within Config.setStyling: '+error);
         }
     }
     /**@private @this this.setTesting - sets the TEST values depending on arguments passed */
@@ -254,11 +253,11 @@ import {writeObjToFile } from './mkRwriter.js';
                     this.#setPrefTest = 'no'   
                     break
                 default:
-                    throw new SyntaxError(`Config.setTesting: Wrong argument entered ${string}`)
+                    throw new SyntaxError(`Wrong argument entered ${string}`)
             }
-            console.log(`User Testing preference set to: ${this.getPrefTest}`)
+           
         } catch (error) {
-            console.error('Error located within Config.setTest: '+error);
+            display_error('Error located within Config.setTest: '+error);
         }
     }
     /**@private @this this.setDocumentation - sets the DOCS values depending on arguments passed */
@@ -276,11 +275,10 @@ import {writeObjToFile } from './mkRwriter.js';
                     this.#setPrefDoc = 'no'
                     break
                 default:
-                    throw new SyntaxError(`Config.setDocumentation: Wrong argument entered ${string}`)
+                    throw new SyntaxError(`Wrong argument entered ${string}`)
             }
-            console.log(`User Documentation preference set to: ${this.getPrefDoc}`)
         } catch (error) {
-            console.error('Error located within Config.setDocumentation: '+error);
+            display_error('Error located within Config.setDocumentation: '+error);
         }
     }
     /**@private @this this.setStorybook - sets the STORY values depending on arguments passed */
@@ -298,11 +296,10 @@ import {writeObjToFile } from './mkRwriter.js';
                     this.#setPrefStory = 'no'
                     break
                 default:
-                    throw new SyntaxError(`Config.setStorybook: Wrong argument entered ${string}`)
+                    throw new SyntaxError(`Wrong argument entered ${string}`)
             }
-            console.log(`User Story Components preference set to: ${this.getPrefStory}`)
         } catch (error) {
-            console.error('Error located within Config.setTest: '+error);
+            display_error('Error located within Config.setTest: '+error);
         }
     }
     /**@private @this this.setCompType - sets the TYPE values depending on arguments passed */
@@ -324,12 +321,11 @@ import {writeObjToFile } from './mkRwriter.js';
 
                     break
                 default:
-                    throw new SyntaxError(`Config.setCompType: Wrong argument entered ${string}`)
+                    throw new SyntaxError(`Wrong argument entered ${string}`)
             }
             
-            console.log(`User Component Type preference set to: ${string}`)
         } catch (error) {
-            console.error(error)
+            display_error('Error located within Config.setComp: '+error)
         }
     }
 
@@ -373,54 +369,54 @@ import {writeObjToFile } from './mkRwriter.js';
     exportConfig(){
         let exp = {
             writing:{
-                preference:(doesExist(this.getPrefWriting))? this.getPrefWriting : 'n/a',
-                type:(doesExist(this.getPrefType)) ? this.getPrefType : 'n/a',
+                preference:(doesExist(this.getPrefWriting))? this.getPrefWriting : 'false',
+                type:(doesExist(this.getPrefType)) ? this.getPrefType : 'false',
             },
             styling:{
-                preference:(doesExist(this.getPrefStyle)) ? this.getPrefStyle : 'n/a',
+                preference:(doesExist(this.getPrefStyle)) ? this.getPrefStyle : 'false',
             },
             testing:{
-                preference:(doesExist(this.getPrefTest)) ? this.getPrefTest : 'n/a',
+                preference:(doesExist(this.getPrefTest)) ? this.getPrefTest : 'false',
             },
             documentation:{
-                preference:(doesExist(this.getPrefDoc)) ? this.getPrefDoc : 'n/a',
+                preference:(doesExist(this.getPrefDoc)) ? this.getPrefDoc : 'false',
               
             },
             storytelling:{
-                preference:(doesExist(this.getPrefStory))? this.getPrefStory : 'n/a',
+                preference:(doesExist(this.getPrefStory))? this.getPrefStory : 'false',
             },
         }
-         return writeObjToFile('./mkR.config.js',exp,'mkR').then(console.log('mkR User Config File has been successfully created at: \'./mkR.config.js\''))
-        // return console.log('mkRComponent User Config File has been successfully created at: \'./mkRUser.config.js\'')
-        
+         return writeObjToFile('./mkR.config.js',exp,'mkR')
+            .then(display_success('mkR User Config File has been successfully created at: \'./mkR.config.js\''))
+          
     }
     exportInternals(){
         return {
             writing:{
-                preference:(doesExist(this.getPrefWriting))? this.getPrefWriting : 'n/a',
-                jsx : (doesExist(this.getJSX)) ? this.getJSX : 'n/a',
-                tsx : (doesExist(this.getTSX)) ? this.getTSX : 'n/a',
-                type:(doesExist(this.getPrefType)) ? this.getPrefType : 'n/a',
-                class: (doesExist(this.getCLASS)) ? this.getCLASS : 'n/a',
-                function: (doesExist(this.getFUNC)) ? this.getFUNC : 'n/a',            
+                preference:(doesExist(this.getPrefWriting))? this.getPrefWriting : 'false',
+                jsx : (doesExist(this.getJSX)) ? this.getJSX : 'false',
+                tsx : (doesExist(this.getTSX)) ? this.getTSX : 'false',
+                type:(doesExist(this.getPrefType)) ? this.getPrefType : 'false',
+                class: (doesExist(this.getCLASS)) ? this.getCLASS : 'false',
+                function: (doesExist(this.getFUNC)) ? this.getFUNC : 'false',            
 
             },
             styling:{
-                preference:(doesExist(this.getPrefStyle)) ? this.getPrefStyle : 'n/a',
-                css : (doesExist(this.getCSS)) ? this.getCSS : 'n/a',
-                sass : (doesExist(this.getSASS))?  this.getSASS : 'n/a',
+                preference:(doesExist(this.getPrefStyle)) ? this.getPrefStyle : 'false',
+                css : (doesExist(this.getCSS)) ? this.getCSS : 'false',
+                sass : (doesExist(this.getSASS))?  this.getSASS : 'false',
             },
             testing:{
-                preference:(doesExist(this.getPrefTest)) ? this.getPrefTest : 'n/a',
-                test : (doesExist(this.getTEST))? this.getTEST :'n/a',
+                preference:(doesExist(this.getPrefTest)) ? this.getPrefTest : 'false',
+                test : (doesExist(this.getTEST))? this.getTEST :'false',
             },
             documentation:{
-                preference:(doesExist(this.getPrefDoc)) ? this.getPrefDoc : 'n/a',
-                docs : (doesExist(this.getDOC))? this.getDOC : 'n/a',
+                preference:(doesExist(this.getPrefDoc)) ? this.getPrefDoc : 'false',
+                docs : (doesExist(this.getDOC))? this.getDOC : 'false',
             },
             storytelling:{
-                preference:(doesExist(this.getPrefStory))? this.getPrefStory : 'n/a',
-                story : (doesExist(this.getSTORY))? this.getSTORY : 'n/a',
+                preference:(doesExist(this.getPrefStory))? this.getPrefStory : 'false',
+                story : (doesExist(this.getSTORY))? this.getSTORY : 'false',
             },
             routes:{
                 component: this.routes.components,
@@ -443,7 +439,4 @@ import {writeObjToFile } from './mkRwriter.js';
 
 
 
- // const {
- //         writing:{preference : writingPref},writing:{type: writingType},styling:{preference:prefStyle},testing:{preference : prefTest},documentation:{preference:prefDocs},storytelling:{preference:prefStory}
- // } = mkRUser
  

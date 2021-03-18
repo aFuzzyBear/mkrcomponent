@@ -48,19 +48,20 @@ import {cleanPath} from './gorbals.js'
   * @param {String} path - Path of the Parent directory for the file to be made in.
   * @param {String} name - Name of the Child directory to be created at the end of the path
   */
-async function mkRdir(path,name){
+async function mkRDir(path,name){
     try {
-        let directory = cleanPath(path)
         
-        if(checkPath(directory)) {
-            await asyncMkdir(`${directory}/${name}`,{recursive:true})
+        if(checkPath(`${path}/${name}`)) {
+            return
         }else{
-            await asyncMkdir(`${directory}`,{recursive:true})
-            mkRdir(directory,name)
+            await asyncMkdir(`${path}`,{recursive:true})
+            await asyncMkdir(`${path}/${name}`,{recursive:true})
+
+            // mkRdir(path,name)
         }
     } catch (error) {
         console.error(`Error Making the Component Directory: ${error}` )
     }
 }
 
-export default mkRdir
+export default mkRDir

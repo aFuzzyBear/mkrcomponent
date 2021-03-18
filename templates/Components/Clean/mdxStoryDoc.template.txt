@@ -1,6 +1,6 @@
 <!--- Component Stories -${name}.stories.mdx -->
 
-import { Meta, Story, Canvas } from '@storybook/addon-docs/blocks';
+import { Meta, Story, Canvas } from '\@storybook/addon-docs/blocks';
 import { ${name} } from './${name}';
 
 <Meta title="MDX/${name}" component={${name}} />

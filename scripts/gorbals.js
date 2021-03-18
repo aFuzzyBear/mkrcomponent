@@ -1,5 +1,6 @@
 #!/bin/env node
 'use strict'
+
 /**
  *@module gorbals
  **   _______       ______  _           _       
@@ -45,12 +46,12 @@
 
 
 export function inputValidation(input){
-    try {
-        let term = checkWord(input)
-        term = toPascalCase(term)
-        return term
-    } catch (error) {
-        console.error(error);
+    let str = input
+    if(str.match(isWord)){
+        return toPascalCase(checkWord(input))
+    }
+    else {
+        display_error('Syntax Error: Input is not a word');
     }
 }
 
@@ -73,16 +74,7 @@ export function toPascalCase(input){
       .replace(new RegExp(/\s/, 'g'), '')
       .replace(new RegExp(/\w/), s => s.toUpperCase());
 }
-/**
- * @exports cleanPath
- * @param {String} path 
- * @description Takes the path for directories and does a layer of sanitation
- */
-export function cleanPath(path){
-    let directory = checkWord(path)
-        if (directory.endsWith('/'))  directory.slice(0,directory.length-1)
-    return directory
-}
+
 /**
  * @function checkWord
  * @param {String} phrase - Takes a phrase and checks to see if it is a word, 
@@ -97,7 +89,16 @@ export function checkWord(phrase) {
     }
     
 }
-
+/**
+ * @exports cleanPath
+ * @param {String} path 
+ * @description Takes the path for directories and does a layer of sanitation
+ */
+ export function cleanPath(path){
+    let directory = checkWord(path)
+        if (directory.endsWith('/'))  directory.slice(0,directory.length-1)
+    return directory
+}
 /**
  * @exports doesExist
  * @param {any} variable 
@@ -125,4 +126,25 @@ export async function extrapolate(obj){
     setup.interface(obj)
     return setup.exportInternals()
 
+}
+export async function createComponent(obj,template,FileExt,FileName=''){
+    // Dynamic Imports
+    const {writeComponentToFile} = await import('./mkRwriter.js')
+    const {templateBuffer} = await import('./buffer.js')
+    let{path_dir,path_temp,placeholder,placeholder:{name}} = obj
+    return await writeComponentToFile(path_dir,FileName || name,FileExt
+        , await templateBuffer(path_temp,template,placeholder))
+}
+
+import fs from 'fs'
+import { display_error } from './console.js'
+export  function checkConfig(){
+     return fs.existsSync('mkR.config.js') ? true : false
+}
+
+
+export async function getInternals(){
+    const {default: config} = await import('../mkR.config.js')
+    let  internals = await extrapolate(config)
+    return internals
 }
