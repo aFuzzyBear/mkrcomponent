@@ -25,7 +25,6 @@
   "homepage": "https://github.com/aFuzzyBear/mkrcomponent#readme",
   "dependencies": {
     "chalk": "^4.1.0",
-    "chalk-animation": "^1.6.0",
     "commander": "^7.1.0",
     "inquirer": "^8.0.0"
   },

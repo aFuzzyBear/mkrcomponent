@@ -2,36 +2,14 @@
 'use strict'
 
 /**
- *@module gorbals
- **   _______       ______  _           _       
- **  (_______)     (_____ \| |         | |      
- **   _   ___  ___  _____) ) |__  _____| |  ___ 
- **  | | (_  |/ _ \|  __  /|  _ \(____ | | /___)
- **  | |___) | |_| | |  \ \| |_) ) ___ | ||___ |
- **   \_____/ \___/|_|   |_|____/\_____|\_|___/ 
- **                                            
- * 
- * 
+ * @module gorbals
  * @description
  * A Named Export module file that contains the global functions and variables that are used in different places around the application. 
- * *      _     _     
- * *     (c).-.(c)    
- * *      / ._. \     
- * *    __\( Y )/__    created by:
- * *   (_.-/'-'\-._)      _         _ 
- * *      ||   ||      _.|_  _ _   |_) _  _.._
- * *    _.' `-' '._   (_|||_|/_/_\/|_)(/_(_||  
- * *   (.-./`-'\.-.)             /        
- * *    `-'     `-'    
- *
- * 
- * @author aFuzzyBear
- * @see https://github.com/aFuzzyBear/
- * 
  * 
  */
 
-// Export Variables go here
+//  Imports
+const {display_error} = await import('./console.js')
 
  // Regex Patterns
  export const isYes = /^y(es)?$/gi
@@ -116,7 +94,7 @@ export function doesExist(variable){
                 return true
         }
     } catch (error) {
-        console.error('Error checking variable\'s existence'+error);        
+        display_error('Error checking variable\'s existence'+error);        
     }
 }
 
@@ -137,7 +115,6 @@ export async function createComponent(obj,template,FileExt,FileName=''){
 }
 
 import fs from 'fs'
-import { display_error } from './console.js'
 export  function checkConfig(){
      return fs.existsSync('mkR.config.js') ? true : false
 }

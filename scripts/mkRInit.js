@@ -111,7 +111,7 @@ function mkRSetup(){
             userSetup.setStories = answers.prefStories
         }
         if(answers.save === 'yes'){
-            userSetup.exportConfig().then(console.log('Setup Configuration has been successfully saved:  ')).catch(err=>console.error(err))
+            userSetup.exportConfig().then(console.log('Setup Configuration has been successfully saved:  ')).catch(err=>display_error(err))
         }
         else if(answers.save === 'no'){
             inquirer.prompt(questions_utility[0]).then(ans=>{

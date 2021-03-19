@@ -60,7 +60,7 @@ async function mkRDir(path,name){
             // mkRdir(path,name)
         }
     } catch (error) {
-        console.error(`Error Making the Component Directory: ${error}` )
+        display_error(`Error Making the Component Directory: ${error}` )
     }
 }
 
