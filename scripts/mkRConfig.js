@@ -1,24 +1,22 @@
-#!/bin/env node
+#!/usr/bin/env node
+'use strict'
 /**
- * 
- * 
- **         _     ______ _______              ___ _       
- **        | |   (_____ (_______)            / __|_)      
- **   ____ | |  _ _____) )       ___  ____ _| |__ _  ____ 
- **  |    \| |_/ )  __  / |     / _ \|  _ (_   __) |/ _  |
- **  | | | |  _ (| |  \ \ |____| |_| | | | || |  | ( (_| |
- **  |_|_|_|_| \_)_|   |_\______)___/|_| |_||_|  |_|\___ |
- **                                                (_____|
- * 
- * 
+ * @module mkRConfig
+ * @description This is the configuration file that the application uses. Here we are setting up a single parent object that would reflect the user settings to the internals of the application allowing the application then to process the information accordingly
  */
 
-import{display_error, display_success} from './console.js'
-import {doesExist} from './gorbals.js'
-import {writeObjToFile } from './mkRwriter.js';
+const {display_error, display_success} = await import('./console.js')
+const {doesExist} = await import('./gorbals.js')
+const {writeJSObjToFile} = await import ('./mkRWriter.js')
 
-// const doesExist = require('./gorbals');
- export default class mkRConfig{
+
+/**
+ * @exports mkRConfig
+ * @class 
+ * @classdesc 
+ * This parent object creates a boolean list of properties that are flags to determine which files to make and which to ignore. This would also reflect the user settings to the internal application, and it would create a user config file which would reflect those values created during the setup process
+ */
+export default class mkRConfig{
     //  Declaring Private Variables
    /**@private @this this.#jsx @type {Boolean}- Sets JSX writing style */
     #jsx;
@@ -164,27 +162,27 @@ import {writeObjToFile } from './mkRwriter.js';
          this.#doc = boolean
     } 
    
-    /**@this this.setPrefWriting @readonly Returns value for WRITING Preference*/
+    /**@private @this this.setPrefWriting  Returns value for WRITING Preference*/
     set #setPrefWriting(/**@type {String} */string){
         return this.prefWriting = string
     }
-    /**@this this.setPrefType @readonly Returns value for TYPE Preference*/
+    /**@private @this this.setPrefType  Returns value for TYPE Preference*/
     set #setPrefType(/**@type {String} */string){
         return this.prefType = string
     }
-    /**@this this.setPrefStyle @readonly Returns value for STYLE Preference*/
+    /**@private @this this.setPrefStyle  Returns value for STYLE Preference*/
     set #setPrefStyle(/**@type {String} */string){
         return this.prefStyle = string
     }
-    /**@this this.setPrefStory @readonly Returns value for STORY Preference*/
+    /**@private @this this.setPrefStory  Returns value for STORY Preference*/
     set #setPrefStory(/**@type {String} */string){
         return this.prefStory = string
     }
-    /**@this this.setPrefTest @readonly Returns value for TEST Preference*/
+    /**@private @this this.setPrefTest  Returns value for TEST Preference*/
     set #setPrefTest(/**@type {String} */string){
         return this.prefTest = string
     }
-    /**@this this.setPrefDoc @readonly Returns value for DOC Preference*/
+    /**@private @this this.setPrefDoc  Returns value for DOC Preference*/
     set #setPrefDoc(/**@type {String} */string){
         return this.prefDoc = string
     }
@@ -356,7 +354,12 @@ import {writeObjToFile } from './mkRwriter.js';
         this.#setStorybook = string
     }
     // Methods
-    
+    /**
+     * @method CheckPrefs
+     * @param {Boolean} prefA 
+     * @param {Boolean} prefB 
+     * @throws {TypeError} if both preferences are the same
+     */
     checkPrefs(prefA,prefB){
         
         function check(prefA,prefB){
@@ -366,6 +369,10 @@ import {writeObjToFile } from './mkRwriter.js';
         if(check(prefA,prefB) === 1) return 
         if(check(prefA,prefB) === 0) throw new TypeError('`Error, Both Preferences are the same, has to be either or, not equals.`') 
     }
+    /**
+     * @method exportConfig
+     * @returns Writes a User Configuration File to the disk with the user settings 
+     */
     exportConfig(){
         let exp = {
             writing:{
@@ -386,10 +393,14 @@ import {writeObjToFile } from './mkRwriter.js';
                 preference:(doesExist(this.getPrefStory))? this.getPrefStory : 'false',
             },
         }
-         return writeObjToFile('./mkR.config.js',exp,'mkR')
+         return writeJSObjToFile('./mkR.config.js',exp,'mkR')
             .then(display_success('mkR User Config File has been successfully created at: \'./mkR.config.js\''))
           
     }
+    /**
+     * @method exportInternals
+     * @returns Object file containing the programs settings
+     */
     exportInternals(){
         return {
             writing:{
@@ -425,13 +436,18 @@ import {writeObjToFile } from './mkRwriter.js';
             
         }
     }
-    interface(obj){
-        this.setWriting = obj.writing.preference
-        this.setType = obj.writing.type
-        this.setStyling = obj.styling.preference
-        this.setTests = obj.testing.preference
-        this.setDocs = obj.documentation.preference
-        this.setStories = obj.storytelling.preference
+    /**
+     * @method interface
+     * @param {Object} us - User Settings 
+     * @description Reads the user configuration object and extrapolates the values and sets the new values within the object to reflect those settings.
+     */
+    interface(us){
+        this.setWriting = us.writing.preference
+        this.setType = us.writing.type
+        this.setStyling = us.styling.preference
+        this.setTests = us.testing.preference
+        this.setDocs = us.documentation.preference
+        this.setStories = us.storytelling.preference
 
     }
  }

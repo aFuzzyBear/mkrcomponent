@@ -4,8 +4,8 @@
  *  @param {Object} Component -  Imports React Component
  */
 import React, { Component } from 'react';
-/** @filename: ${name}.${style} */
-import '/${name}.${style}'
+/** @filename: ${name}.css */
+import './${name}.css'
 
 //Defining the  Prop Types
 interface ${name}Props {

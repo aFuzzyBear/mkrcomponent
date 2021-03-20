@@ -1,4 +1,4 @@
-#!/bin/env node
+#!/usr/bin/env node
 'use strict'
 
 /**
@@ -16,10 +16,6 @@ const {display_error} = await import('./console.js')
  export const isNo = /^n(o)?$/gi
  export const isWord =/([A-Z]|[a-z])\w+/gi
 
-
-
-//  Export Functions go here
-
 //String Validation & Sanitisation
 
 
@@ -34,7 +30,7 @@ export function inputValidation(input){
 }
 
 /**
- * toPascalCase
+ * @exports toPascalCase
  * @param {String} input 
  * @returns A string that has been converted into Pascal Case for keeping with the React Naming convention required for naming Components. 
  * @see https://stackoverflow.com/a/53952925/13301381 
@@ -54,7 +50,7 @@ export function toPascalCase(input){
 }
 
 /**
- * @function checkWord
+ * @exports checkWord
  * @param {String} phrase - Takes a phrase and checks to see if it is a word, 
  * @returns a String of the Phrase if it is a word
  * @throws {SyntaxError} if the input is not recognised as a word
@@ -98,28 +94,50 @@ export function doesExist(variable){
     }
 }
 
-export async function extrapolate(obj){
-    let {default:mkRConfig} = await import('./mkRconfig.js')
+/**
+ * @async 
+ * @exports extrapolate
+ * @param {Object} settings 
+ * @returns Takes the User Settings from the configuration file and extrapolates the values so they can be exported as a internal configuration file, 
+ */
+export async function extrapolate(settings){
+    let {default:mkRConfig} = await import('./mkRConfig.js')
     let setup = new mkRConfig()
-    setup.interface(obj)
+    setup.interface(settings)
     return setup.exportInternals()
 
 }
+/**
+ * @async
+ * @exports createComponent 
+ * @param {Object} obj - Contains a collection of information creating the  
+ * @param {String} template - Name of the template file to be read
+ * @param {String} FileExt - Name of the File extension to be saved as
+ * @param {String} FileName? - Optional File name 
+ * @returns Creates a component from the information passed into it. 
+ */
 export async function createComponent(obj,template,FileExt,FileName=''){
-    // Dynamic Imports
-    const {writeComponentToFile} = await import('./mkRwriter.js')
-    const {templateBuffer} = await import('./buffer.js')
+    const {writeComponentToFile} = await import('./mkRWriter.js')
+    const {templateBuffer} = await import('./mkRBuffer.js')
     let{path_dir,path_temp,placeholder,placeholder:{name}} = obj
     return await writeComponentToFile(path_dir,FileName || name,FileExt
         , await templateBuffer(path_temp,template,placeholder))
 }
 
-import fs from 'fs'
-export  function checkConfig(){
+/**
+ * @exports checkConfig
+ * @returns Boolean - Checks if the User Config file exists
+ */
+import fs  from "fs";
+export function checkConfig(){
      return fs.existsSync('mkR.config.js') ? true : false
 }
 
-
+/**
+ * @async
+ * @exports getInternals
+ * @returns Internal configuartion object that informs which component files are to be made
+ */
 export async function getInternals(){
     const {default: config} = await import('../mkR.config.js')
     let  internals = await extrapolate(config)

@@ -1,7 +1,7 @@
 // Lazy Component - ${name}.tsx
 import React, { FC } from 'react';
 
-import '/${name}.${style}'
+import './${name}.css'
 
 interface ${name}Props {
 

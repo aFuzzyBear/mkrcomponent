@@ -1,7 +1,7 @@
 // ${name}.jsx
 import React, {  } from 'react'
 // Stylesheet
-import '/${name}.${style}'
+import './${name}.css'
 
 /**
  * @function ${name} Component

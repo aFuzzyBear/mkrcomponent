@@ -1,8 +1,8 @@
 // Lazy Component - ${name}.tsx
 /** @filename react.js */
 import React, { FC,lazy } from 'react';
-/** @filename: ${name}.${style} */
-import '/${name}.${style}'
+/** @filename: ${name}.css */
+import './${name}.css'
 
 
 //React Lazy function

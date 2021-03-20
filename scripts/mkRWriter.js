@@ -2,48 +2,28 @@
 'use strict'
 /**
   * @module mkRWriter
- ** 
- **  
- **         _     ______               _                   
- **        | |   (_____ \  _   _      (_)  _               
- **   ____ | |  _ _____) )| |_| | ____ _ _| |_ _____  ____ 
- **  |    \| |_/ )  __  / | | | |/ ___) (_   _) ___ |/ ___)
- **  | | | |  _ (| |  \ \ | | | | |   | | | |_| ____| |    
- **  |_|_|_|_| \_)_|   |_| \___/|_|   |_|  \__)_____)_|    
- **                                                                
- * 
- * @description A utility file containing functions that allow to write data
- * To files that are found in the destination described by the PATH variable. 
- * writeFile utilises NodeJS 'fs' package to provide file system abilities.
- * In this case we will be utilising the asynchronous WriteFile method. 
- * This is a named export file. 
- * 
- **    _     _   
- **   (c).-.(c)  
- **    / ._. \   
- **  __\( Y )/__  created by:
- ** (_.-/'-'\-._)    _         _ 
- **    ||   ||    _.|_  _ _   |_) _  _.._
- **  _.' `-' '._ (_|||_|/_/_\/|_)(/_(_||  
- ** (.-./`-'\.-.)           /        
- **  `-'     `-'  
- * @author aFuzzyBear
- * @see https://github.com/aFuzzyBear/
+  * @description This module contains the writing data to files utility functions that were used through building the application. 
  */
-
 
 
 /**
  * @module 'fs/promises' {writeFile as asyncWriteFile} 
  * @see https://nodejs.org/api/fs.html#fs_fspromises_writefile_file_data_options
  */
-import {writeFile as asyncWriteFile} from 'fs/promises';
-import util from 'util'
-import { display_error } from './console.js';
-import {cleanPath} from './gorbals.js'
+const {writeFile : asyncWriteFile} = await import('fs/promises')
 
 /**
- * @async writeComponentToFile
+ * @module 'util' {writeFile as asyncWriteFile} 
+ * @see https://nodejs.org/api/util.html#util_util
+ */
+const {default : util} = await import ('util')
+
+const { display_error } = await import('./console.js')
+const {cleanPath} = await import('./gorbals.js')
+
+/**
+ * @async 
+ * @exports writeComponentToFile
  * @param {String} path - Path for the file to be written to
  * @param {String} name - Name of the Component that the file will be named after
  * @param {String} extension - Provide the output file type extension
@@ -52,7 +32,7 @@ import {cleanPath} from './gorbals.js'
  * @throws display_error('Error Writing to the file: '+ error)
  * 
  */
-async function writeComponentToFile(path,name,extension,data){
+export async function writeComponentToFile(path,name,extension,data){
     try {
         let dir = cleanPath(path)
         return await asyncWriteFile(`${dir}/${name}.${extension}`,data,{
@@ -63,14 +43,15 @@ async function writeComponentToFile(path,name,extension,data){
     }
 }
 /**
- * @async writeDocToFile
+ * @async 
+ * @exports writeDocToFile
  * @param {String} path - Path for the file to be written to
  * @param {String | Buffer | Uint8Array |Object} data - Data to be written to the file 
  * @return Asynchronously Writes the data to file to  path/name.extension. 
  * Replacing the existing file if one exists at that location
  * @throws display_error('Error Writing to the file: '+ error)
  */
-async function writeDocToFile(path,data){
+export async function writeDocToFile(path,data){
     try {
         return await asyncWriteFile(path,data,{encoding:'utf-8',flag:'w'})
         
@@ -80,18 +61,17 @@ async function writeDocToFile(path,data){
 }
 
 /**
- * @async writeDocToFile
+ * @async 
+ * @exports writeJSObjToFile
  * @param {String} path - Path for the file to be written to, including file extension
- * @param {String | Buffer | Uint8Array | Object} data - Data to be written to the file 
+ * @param {Object} data - JS Object Data to be written to the file 
  * @param {String} name - Name of the Variable for the File to be labeled in the Export. 
  * @return Asynchronously Writes the data to file to  path/name.extension. 
  * Replacing the existing file if one exists at that location
  * @throws display_error('Error Writing to the file: '+ error)
- * @example
- *  Exports a file to the destination path, 
  *  
  */
-async function writeJSObjToFile(path,data,name='object'){
+export async function writeJSObjToFile(path,data,name='object'){
     try {
         return await asyncWriteFile(path,util.formatWithOptions({
             compact: false
@@ -102,9 +82,3 @@ async function writeJSObjToFile(path,data,name='object'){
     }
 }
 
-/**
- * @exports writeComponentToFile
- * @exports writeDocToFile
- * @exports writeObjToFile
- */
-export {writeComponentToFile, writeDocToFile, writeJSObjToFile as writeObjToFile};

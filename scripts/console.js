@@ -1,4 +1,4 @@
-#!/bin/env node
+#!/usr/bin/env node
 'use strict'
 /**
  * @name console.js
@@ -29,6 +29,20 @@ export const title_text =chalk.keyword('purple')( `
  |_|_|__|_| \\_)_|   |__\\_____)___/|_|_|_|  __/ \\___/|_| |_|_____)_| |_| \\__)
                                         |_|                              
 
+`)
+/**
+ * @exports setup_text
+ * @description Exports the mkRComponent Setup Text in a colourful Green to be displayed in the console
+ */
+export const setup_text = chalk.keyword('green')(`
+
+          _     ______   ______                         
+         | |   (_____ \\ / _____)        _               
+    ____ | |  _ _____) | (____  _____ _| |_ _   _ ____  
+   |    \\| |_/ )  __  / \\____ \\| ___ (_   _) | | |  _ \\ 
+   | | | |  _ (| |  \\ \\ _____) ) ____| | |_| |_| | |_| |
+   |_|_|_|_| \\_)_|   |_(______/|_____)  \\__)____/|  __/ 
+                                                 |_|    
 `)
 
 /**

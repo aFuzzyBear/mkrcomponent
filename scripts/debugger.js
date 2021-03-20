@@ -1,32 +1,11 @@
+#!/usr/bin/env node
+'use strict'
 /**
- * 
- **      _       _                                   
- **     | |     | |                                  
- **   __| |_____| |__  _   _  ____  ____ _____  ____ 
- **  / _  | ___ |  _ \| | | |/ _  |/ _  | ___ |/ ___)
- ** ( (_| | ____| |_) ) |_| ( (_| ( (_| | ____| |    
- **  \____|_____)____/|____/ \___ |\___ |_____)_|    
- **                         (_____(_____|            
- * 
+ * @module debugger.js
  * @description A utility file containing debugging functions 
  * That are used in the development of mkRComponent. 
  * This is a named export file.
  * 
- * Exported Functionality:
- * memUsage() - Outputs to the console the memory usage summary from the NodeJS process environment. 
- * racer() - Outputs the time it takes for a function to execute to the console.
- * 
- **    _     _   
- **   (c).-.(c)  
- **    / ._. \   
- **  __\( Y )/__  created by:
- ** (_.-/'-'\-._)    _         _ 
- **    ||   ||    _.|_  _ _   |_) _  _.._
- **  _.' `-' '._ (_|||_|/_/_\/|_)(/_(_||  
- ** (.-./`-'\.-.)           /        
- **  `-'     `-'  
- * @author aFuzzyBear
- * @see https://github.com/aFuzzyBear/
  */
 
 /**

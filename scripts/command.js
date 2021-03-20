@@ -1,4 +1,4 @@
-#!/bin/env node
+#!/usr/bin/env node
 'use strict'
 /**
  * @module Command
@@ -17,7 +17,7 @@
 const { Command } = await import( "commander")
 
 // Import the Setup Utility Function
-const {default:mkRSetup} = await import( "./mkRInit.js")
+const {default:mkRSetup} = await import( "./mkRSetup.js")
 // Import Utility functions 
 const { checkConfig, inputValidation } = await import( "./gorbals.js")
 // Import the Component Maker Utility Function

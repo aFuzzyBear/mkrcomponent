@@ -1,4 +1,4 @@
-#!/bin/env node
+#!/usr/bin/env node
 /**
  * @module Buffer
  * @description Export Module which contains all the related buffer usage and functionality that is needed for the mkRComponent
@@ -6,7 +6,7 @@
  
 
 // Imports
-const reader = await import( './mkRreader.js')
+const reader = await import( './mkRReader.js')
 
 
 /**

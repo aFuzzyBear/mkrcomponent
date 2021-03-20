@@ -1,7 +1,7 @@
 // ${name}.jsx - Lazy
 import React, { Component, lazy} from 'react';
 
-import '/${name}.css'
+import './${name}.css'
 
 // const  = React.lazy(() => import(''));
 
