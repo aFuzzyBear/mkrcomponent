@@ -57,3 +57,4 @@ import mkRProgram from "../scripts/command.js"
 // mkRComponent('dad')
 
 mkRProgram.parse()
+

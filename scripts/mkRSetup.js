@@ -15,7 +15,7 @@ import { display_output, setup_text } from "./console.js";
 
 let userSetup = new mkRConfig()
 
-function mkRSetup(){
+export default async function mkRSetup(){
     display_output(setup_text)
     questionnaire(questions_setup).then(answers=>{
         if(answers.prefWriting){
@@ -58,4 +58,3 @@ function mkRSetup(){
     })
     
 }
-export default mkRSetup

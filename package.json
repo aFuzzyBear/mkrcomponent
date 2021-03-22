@@ -1,11 +1,12 @@
 {
   "name": "mkrcomponent",
-  "version": "1.1.0",
-  "description": "A small CLI utility application that allows you to quickly make either a React Class Component or a Functional Component. Enter the name of the Component  and the Application would create the relevant folder for the component and subsequent files such as: Stylesheets, Test File, Stories, readme file. These additional files are created along with the React Component, which is all specified by the user config file. The purpose of this small utility application is to help save time and limit the errors that can come from doing repetitive tasks.",
+  "version": "1.2.0",
+  "description": "A small CLI utility application that allows you to quickly make a React Component. Enter the name of the Component  and the Application would create the relevant folder for the component and subsequent files such as: Stylesheets, Test File, Stories, readme file. These additional files are created along with the React Component, which is all specified by the user config file. The purpose of this small utility application is to help save time and limit the errors that can come from doing this one time consuming laboriously mundane and repetitive task.",
   "main": "bin/index.js",
   "type": "module",
   "scripts": {
-    "mkrcomp": "node ./bin/index.js"
+    "mkrcomp": "./bin/index.js",
+    "mkrinit": "./bin/init.js"
   },
   "repository": {
     "type": "git",
@@ -28,6 +29,7 @@
     "inquirer": "^8.0.0"
   },
   "bin": {
-    "mkrcomp": "./bin/index.js"
+    "mkrcomp": "node ./bin/index.js",
+    "mkrinit": "node ./bin/init.js"
   }
 }

@@ -1,5 +1,6 @@
 #!/usr/bin/env node
 'use strict'
+
 /**
  * @module Command
  * @description Contains the CLI interface for the mkRComponent 
@@ -22,10 +23,10 @@ const {default:mkRSetup} = await import( "./mkRSetup.js")
 const { checkConfig, inputValidation } = await import( "./gorbals.js")
 // Import the Component Maker Utility Function
 const {default:mkRComponent} = await import( './mkRComp.js')
+const {display_warn,display_error} = await import('./console.js')
 
 
-
-/**@constant mkRProgram - Program's CLI Interface */
+/**@constant mkRProgram - mkRComponent's CLI Interface */
 const mkRProgram = new Command()
 
 mkRProgram
@@ -39,12 +40,21 @@ mkRProgram
     .action((name)=>{
         // String Sanitisation
         let str = inputValidation(Object.values(name).join(' '))
-        // If Config File Exists - Create Component Or Run Setup
-        return (checkConfig()) ? mkRComponent(str): mkRSetup()
+
+        return (checkConfig()) ? mkRComponent(str): display_warn('Ah, please run: \'npm run mkrinit\' first before running this command again, merci bien')
     })
-    
-    
+    .configureOutput({
+        outputError: (str,write) => write(display_error(str))
+    })
+
+
+
 /**
  * @export mkRProgram
  */
 export default mkRProgram
+
+export const mkRInit = new Command()
+
+mkRInit
+    .action(()=>mkRSetup())
